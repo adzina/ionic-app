@@ -1,0 +1,27 @@
+<body>
+  <ion-navbar>
+  	<ion-title>Add students</ion-title>
+    <ion-buttons left>
+        <button ion-button icon-only (click)="goback()" class="my-style-for-modal">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-buttons start>
+  		 <button ion-button (click)="logout()">
+  			 Logout
+  		 </button>
+  	 </ion-buttons>
+
+
+  </ion-navbar>
+
+
+
+  <div>
+    <div *ngFor=" let student of students">
+        {{student.name}}  {{student.surname}} <input type="checkbox" (click)="submit()">
+
+    </div>
+  </div>
+
+</body>

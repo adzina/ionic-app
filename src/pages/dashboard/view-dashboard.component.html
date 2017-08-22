@@ -1,0 +1,43 @@
+
+<ion-navbar>
+	<ion-title>Dashboard</ion-title>
+	<ion-buttons left>
+			<button ion-button icon-only (click)="goback()" class="my-style-for-modal">
+					<ion-icon name="arrow-back"></ion-icon>
+			</button>
+	</ion-buttons>
+	<ion-buttons start>
+		 <button ion-button (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+
+
+</ion-navbar>
+
+<body>
+
+		<div *ngIf="chosenLesson!='null'">
+			 <div class="word_to_guess">{{word.eng}}</div><br><br>
+
+
+			 <div class="grid2x2" *ngIf="!mode">
+									<!-- iteruje po wszystkich opcjach z tablicy i tworzy kolejne przyciski wg wzoru-->
+									<div *ngFor=" let word of lessonsFiltered">
+											<button ion-button round type="submit" class={{ok}} (click)="assign(word.pol)">{{word.pol}}</button>
+									</div>
+			</div>
+
+			<div *ngIf="mode">
+
+								<input type="text" name="response" [(ngModel)]="response" class={{ok}} (keyup.enter)="assign(response)" placeholder="Your response">
+
+			</div>
+
+
+			<div padding class="reponse" *ngIf="clicked">
+									<p align="center">Correct response: {{word.pol}}</p>
+									<button ion-button block (click)="nextword()"> NEXT >> </button>
+			</div>
+</div>
+</body>

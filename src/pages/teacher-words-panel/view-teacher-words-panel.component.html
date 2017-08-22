@@ -1,0 +1,33 @@
+<ion-navbar>
+	<ion-title>Add words to learn</ion-title>
+	<ion-buttons left>
+        <button ion-button icon-only (click)="goback()" class="my-style-for-modal">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>
+	<ion-buttons start>
+		 <button ion-button (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+
+
+</ion-navbar>
+<body>
+
+
+  <div>
+    <div *ngFor=" let lesson of lessonsFiltered">
+        {{lesson.eng}}  {{lesson.pol}}
+    </div>
+  </div>
+  <div>
+  <form action="/">
+
+      <input type="text"  name="english" [(ngModel)]="english" placeholder="english">
+      <input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit()"/>
+      <button type="button" (click)="submit()">Submit</button>
+
+  </form>
+  </div>
+</body>

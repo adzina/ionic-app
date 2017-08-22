@@ -1,0 +1,14 @@
+<ion-navbar>
+	<ion-title>Dashboard</ion-title>
+<ion-buttons start>
+		 <button ion-button (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+</ion-navbar>
+
+<div padding>
+  <button ion-button color="primary" block (click)="setAction(0)">Add words</button>
+  <button ion-button color="primary" block (click)="setAction(1)">Assign lessons to students</button>
+  <button ion-button color="primary" block (click)="setAction(2)">See students' progress</button>
+</div>

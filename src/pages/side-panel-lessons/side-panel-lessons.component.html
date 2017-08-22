@@ -1,0 +1,21 @@
+
+<ion-menu [content]="content">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Lessons</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <input type="date">
+    <ion-list>
+      <button ion-item *ngFor="let lessonName of lessonsUnique" (click)="choose(lessonName)">
+        {{lessonName}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
