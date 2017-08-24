@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler,NavController } from 'ionic-angular';
 import {DatePicker} from '@ionic-native/date-picker';
-import { MyApp } from './app.component';
+import { LanguageApp } from './app.component';
 
-import {SidePanelLessonsComponent} from '../pages/side-panel-lessons/side-panel-lessons.component';
+import {TeacherChooseLessonsComponent} from '../pages/teacher-choose-lessons/teacher-choose-lessons.component';
 import { LoginComponent } from '../pages/login/view-login.component';
 import { RegisterComponent} from '../pages/register/view-register.component';
 import {ChooseModeComponent} from '../pages/choose-mode/view-choose-mode.component';
+import {ChooseLessonComponent} from '../pages/choose-lesson/view-choose-lesson.component';
 import {DashboardComponent} from '../pages/dashboard/view-dashboard.component';
 import {TeacherDashboardComponent} from '../pages/teacher-dashboard/view-teacher-dashboard.component';
 import {TeacherAddStudentsComponent} from '../pages/teacher-add-students/view-teacher-add-students.component';
@@ -23,11 +24,12 @@ import {UserService} from '../services/user.service';
 
 @NgModule({
   declarations: [
-    MyApp,
-    SidePanelLessonsComponent,
+    LanguageApp,
+    TeacherChooseLessonsComponent,
     LoginComponent,
     RegisterComponent,
     ChooseModeComponent,
+    ChooseLessonComponent,
     ProgressComponent,
     DashboardComponent,
     TeacherDashboardComponent,
@@ -37,15 +39,16 @@ import {UserService} from '../services/user.service';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(LanguageApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    SidePanelLessonsComponent,
+    LanguageApp,
+    TeacherChooseLessonsComponent,
     LoginComponent,
     RegisterComponent,
     ChooseModeComponent,
+    ChooseLessonComponent,
     ProgressComponent,
     DashboardComponent,
     TeacherDashboardComponent,

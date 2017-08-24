@@ -22,13 +22,8 @@ export class TeacherWordsPanelComponent {
     private _userService: UserService) {
     //-----------------------------------------------------------------------------
     this.lessons = [{ eng: "one", pol: "jeden", id: "1", lesson: "words1" }, { eng: "two", pol: "dwa", id: "2", lesson: "words1" }, { eng: "three", pol: "trzy", id: "3", lesson: "words1" }, { eng: "cat", pol: "kot", id: "4", lesson: "words2" }, { eng: "dog", pol: "pies", id: "5", lesson: "words2" }];
-    this.chosenLesson = null;
-    this.lessonsUnique=[];
-    this.onlyUniqueLessons();
     //------------------------------------------------------------------------------
-  }
-  handleLessonChosen(x:string){
-    this.chosenLesson=x;
+    this.chosenLesson=_userService.getLesson();
     //--------------------------------------------------------------------------------
     //pobierz z bazy danych tylko slowka z danej lekcji
     this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
@@ -40,18 +35,7 @@ export class TeacherWordsPanelComponent {
       out: [words]
     */
   }
-  onlyUniqueLessons(){
 
-    this.lessonsUnique[0]=this.lessons[0].lesson;
-    var uniqueIndex=0;
-    for(var i=1;i<this.lessons.length;i++){
-      if(this.lessons[i].lesson!=this.lessonsUnique[uniqueIndex]){
-        uniqueIndex++;
-        this.lessonsUnique[uniqueIndex]=this.lessons[i].lesson;
-      }
-    }
-
-  }
   submit() {
     //-------------------------------------------------------------------------------
 
@@ -67,9 +51,6 @@ export class TeacherWordsPanelComponent {
     */
     this.polish = "";
     this.english = "";
-  }
-  goback(){
-    this._userService.goback();
   }
   logout(){
     this._navCtrl.push(GoodbyeComponent);

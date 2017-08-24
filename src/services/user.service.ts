@@ -5,17 +5,13 @@ import { Subject }    from 'rxjs/Subject';
 @Injectable()
 
 export class UserService{
-//  constructor(private _navCtrl:NavController){  }
-  // Observable string sources
-private lessonChosenSource = new Subject<string>();
+private lesson:string;
 private option: number;
 
-// Observable string streams
-lessonChosen$ = this.lessonChosenSource.asObservable();
 
 // Service message commands
 chooseLesson(lesson: string) {
-  this.lessonChosenSource.next(lesson);
+  this.lesson=lesson;
 }
 chooseOption(option: number) {
   this.option=option;
@@ -23,6 +19,10 @@ chooseOption(option: number) {
 getOption(){
   return this.option;
 }
+getLesson(){
+  return this.lesson;
+}
+
 goback(){
 //  this._navCtrl.pop();
 }

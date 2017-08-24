@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
 import {LoginService} from '../../services/login.service';
-import {DashboardComponent} from '../dashboard/view-dashboard.component';
 import {ProgressComponent} from '../progress/view-progress.component';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
-import {SidePanelLessonsComponent} from '../side-panel-lessons/side-panel-lessons.component';
+import {ChooseLessonComponent} from '../choose-lesson/view-choose-lesson.component';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class ChooseModeComponent{
   setmode(m:number){
     if(m!=2){
     this._loginService.setMode(m);
-    this._navCtrl.push(SidePanelLessonsComponent);
+    this._navCtrl.push(ChooseLessonComponent);
 }
   else
   this._navCtrl.push(ProgressComponent);

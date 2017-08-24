@@ -1,0 +1,15 @@
+<ion-navbar>
+	<ion-title>Choose lesson</ion-title>
+<ion-buttons start>
+		 <button ion-button (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+
+
+</ion-navbar>
+    <ion-list>
+      <button ion-item *ngFor="let lessonName of lessonsUnique" (click)="choose(lessonName)">
+        {{lessonName}}
+      </button>
+    </ion-list>

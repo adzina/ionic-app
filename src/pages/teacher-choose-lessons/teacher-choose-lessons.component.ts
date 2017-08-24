@@ -1,18 +1,19 @@
 import { Component} from '@angular/core';
+import { NavController} from 'ionic-angular';
 import {DatePicker} from '@ionic-native/date-picker'
 import {LoginService} from '../../services/login.service';
 import {UserService} from '../../services/user.service';
-import {DashboardComponent} from '../dashboard/view-dashboard.component';
 import {TeacherAddStudentsComponent} from '../teacher-add-students/view-teacher-add-students.component';
 import {TeacherWordsPanelComponent} from '../teacher-words-panel/view-teacher-words-panel.component';
+import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
 
 
 @Component({
-  selector: 'side-panel-lessons',
-  templateUrl: 'side-panel-lessons.component.html'
+  selector: 'teacher-choose-lessons',
+  templateUrl: 'teacher-choose-lessons.component.html'
 })
 
-export class SidePanelLessonsComponent {
+export class TeacherChooseLessonsComponent {
 
   lessons: word[];
   lessonsUnique: string[];
@@ -20,6 +21,7 @@ export class SidePanelLessonsComponent {
   constructor(
     private _loginService:LoginService,
     private _userService: UserService,
+    private _navCtrl: NavController,
     private _datePicker: DatePicker
   ) {
     //-----------------------------------------------------------------------------
@@ -27,26 +29,8 @@ export class SidePanelLessonsComponent {
     this.lessonsUnique=[];
     this.onlyUniqueLessons();
     //------------------------------------------------------------------------------
-    if(this._loginService.getUserType()=="student"){
-      this.rootPage=DashboardComponent;
-    }
-    else{
-      let op=_userService.getOption();
-      alert(op);
-      if(op==0)
-        this.rootPage=TeacherWordsPanelComponent;
 
-      if(op==1)
-        this.rootPage=TeacherAddStudentsComponent;
-    }
-    this._datePicker.show({
-            date: new Date(),
-            mode: 'date',
-            androidTheme: this._datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-          }).then(
-            date => console.log('Got date: ', date),
-            err => console.log('Error occurred while getting date: ', err)
-);
+
   }
   onlyUniqueLessons(){
 
@@ -63,6 +47,15 @@ export class SidePanelLessonsComponent {
   }
   choose(lessonNr: string) {
     this._userService.chooseLesson(lessonNr);
+      let op=this._userService.getOption();
+      if(op==0)
+        this._navCtrl.push(TeacherWordsPanelComponent);
+
+      if(op==1)
+        this._navCtrl.push(TeacherAddStudentsComponent);
+  }
+  logout(){
+    this._navCtrl.push(GoodbyeComponent);
   }
 }
 

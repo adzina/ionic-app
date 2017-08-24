@@ -37,10 +37,8 @@ export class DashboardComponent{
     this.clicked=false;
     this.lessonsFiltered=[];
     this.mode=this._loginService.getMode();
-    _userService.lessonChosen$.subscribe(
-      lesson => {
-        this.handleLessonChosen(lesson);
-    });
+    this.handleLessonChosen(this._userService.getLesson());
+
 
   }
 

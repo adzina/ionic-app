@@ -1,10 +1,5 @@
 <ion-navbar>
 	<ion-title>Add words to learn</ion-title>
-	<ion-buttons left>
-        <button ion-button icon-only (click)="goback()" class="my-style-for-modal">
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
-    </ion-buttons>
 	<ion-buttons start>
 		 <button ion-button (click)="logout()">
 			 Logout
@@ -16,18 +11,26 @@
 <body>
 
 
-  <div>
-    <div *ngFor=" let lesson of lessonsFiltered">
-        {{lesson.eng}}  {{lesson.pol}}
-    </div>
-  </div>
-  <div>
-  <form action="/">
+  <div style="text-align:center">
+		<h1>Lesson: {{chosenLesson}}</h1>
+		<table align="center">
+			<tr>
+				<td><b>English</b></td>
+				<td><b>Polish</b></td>
+			</tr>
+	    <tr *ngFor=" let lesson of lessonsFiltered">
+	        <td>{{lesson.eng}}</td>  <td>{{lesson.pol}}</td>
+	    </tr>
+			<tr>
+				<td><input type="text"  name="english" [(ngModel)]="english" placeholder="english"></td>
+				<td><input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit()"/></td>
+			</tr>
+		</table>
+	  <div>
 
-      <input type="text"  name="english" [(ngModel)]="english" placeholder="english">
-      <input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit()"/>
-      <button type="button" (click)="submit()">Submit</button>
+	      <button ion-button (click)="submit()">Submit</button>
 
-  </form>
-  </div>
+	  </div>
+
+	</div>
 </body>

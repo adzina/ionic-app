@@ -1,0 +1,26 @@
+<ion-navbar>
+	<ion-title>Choose learning scope</ion-title>
+<ion-buttons start>
+		 <button ion-button (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+
+
+</ion-navbar>
+<div padding *ngIf="mode==null">
+  <button ion-button color="primary" block (click)="setmode(0)">From date to date</button>
+  <button ion-button color="primary" block (click)="setmode(1)">Specific lesson</button>
+</div>
+
+
+	 <div *ngIf="mode==0" style="text-align: center;">
+		 <button ion-button (click)="from()">From</button>
+		 <button ion-button (click)="until()">Until</button>
+	 </div>
+	 <div *ngIf="mode==1" style="text-align: center;">
+		 <ion-list>
+			 <button ion-item *ngFor="let lessonName of lessonsUnique" (click)="choose(lessonName)">
+				 {{lessonName}}
+			 </button>
+		 </ion-list>
