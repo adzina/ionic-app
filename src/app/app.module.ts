@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler,NavController } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {DatePicker} from '@ionic-native/date-picker';
+import {Toast} from '@ionic-native/toast';
 import { LanguageApp } from './app.component';
 
 import {TeacherChooseLessonsComponent} from '../pages/teacher-choose-lessons/teacher-choose-lessons.component';
@@ -58,6 +59,7 @@ import {UserService} from '../services/user.service';
   ],
   providers: [
     DatePicker,
+    Toast,
     StatusBar,
     SplashScreen,
     LoginService,
