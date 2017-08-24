@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import {Toast} from '@ionic-native/toast';
 import {LoginService} from '../../services/login.service';
 import { NavController } from 'ionic-angular';
 
@@ -12,7 +13,9 @@ export class RegisterComponent {
   password: string;
   name: string;
   surname: string;
-  constructor(private _loginService:LoginService, private _navCtrl:NavController) {
+  constructor(private _loginService:LoginService,
+              private _navCtrl:NavController,
+              private _toast: Toast) {
     this.inputType = 'password';
     this.email="";
     this.password="";}
@@ -35,7 +38,8 @@ export class RegisterComponent {
       alert("Account with this credentials already exists");
     }
     */
-    alert("The account has been created, you can log in now");
+    this._toast.show("The account has been created, you can log in now","5000","bottom");
+    
     this._navCtrl.pop();
     };
 

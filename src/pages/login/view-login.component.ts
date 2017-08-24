@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
+import { Toast } from '@ionic-native/toast';
 import {LoginService} from '../../services/login.service';
 import {ChooseModeComponent} from '../choose-mode/view-choose-mode.component';
 import { RegisterComponent} from '../register/view-register.component';
@@ -14,7 +15,9 @@ export class LoginComponent{
   inputType: string;
   username: string;
   password: string;
-  constructor(private _loginService: LoginService, public _navCtrl: NavController){
+  constructor(private _loginService: LoginService,
+              private _navCtrl: NavController,
+              private _toast: Toast){
     this.inputType = 'password';
     this.username="";
     this.password="";
@@ -51,7 +54,7 @@ submit(type:string){
         }
       }
       else{
-        alert('Wrong credentials');
+        this._toast.show('Wrong credentials','5000','bottom');
       }
       //==================================================================
       /*

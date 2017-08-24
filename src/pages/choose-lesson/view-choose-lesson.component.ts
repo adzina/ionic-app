@@ -66,11 +66,11 @@ export class ChooseLessonComponent{
             androidTheme: this._datePicker.ANDROID_THEMES.THEME_HOLO_DARK
           }).then(
             date => {this.until_date=date;
-            if(this.until_date>this.from_date)
-              this._navCtrl.push(DashboardComponent);
-            else
-            this.toast.show(`Wrong dates`, '5000', 'bottom');
-            }
+                    if(this.until_date>this.from_date)
+                      this._navCtrl.push(DashboardComponent);
+                    else
+                      this.toast.show(`Wrong dates`, '5000', 'bottom');
+                    }
             );
           }
 
