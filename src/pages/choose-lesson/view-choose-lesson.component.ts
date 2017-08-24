@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DatePicker} from '@ionic-native/date-picker';
-import { Toast } from '@ionic-native/toast';
+import { ToastController } from 'ionic-angular';
 import { NavController} from 'ionic-angular';
 import {UserService} from '../../services/user.service';
 import {DashboardComponent} from '../dashboard/view-dashboard.component';
@@ -23,7 +23,7 @@ export class ChooseLessonComponent{
   constructor(private _navCtrl: NavController,
               private _datePicker: DatePicker,
               private _userService: UserService,
-            private toast: Toast){
+              private _toast: ToastController){
                 //-----------------------------------------------------------------------------
                 this.lessons = [{ eng: "one", pol: "jeden", id: "1", lesson: "words1" }, { eng: "two", pol: "dwa", id: "2", lesson: "words1" }, { eng: "three", pol: "trzy", id: "3", lesson: "words1" }, { eng: "cat", pol: "kot", id: "4", lesson: "words2" }, { eng: "dog", pol: "pies", id: "5", lesson: "words2" }];
                 this.lessonsUnique=[];
@@ -69,12 +69,19 @@ export class ChooseLessonComponent{
                     if(this.until_date>this.from_date)
                       this._navCtrl.push(DashboardComponent);
                     else
-                      this.toast.show(`Wrong dates`, '5000', 'bottom');
+                      this.presentToast();
                     }
             );
           }
 
-
+  presentToast() {
+      let toast = this._toast.create({
+                message: 'Wrong dates',
+                duration: 5000,
+                position: 'middle'
+              });
+          toast.present();
+        }
 logout(){
   this._navCtrl.push(GoodbyeComponent);
 }
