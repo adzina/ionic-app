@@ -1,7 +1,25 @@
-<!--<navbar></navbar>-->
 <ion-navbar>
-  Your progress
+	<ion-title>Your progress</ion-title>
+	<ion-buttons start>
+		 <button ion-button (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+
+
 </ion-navbar>
-<p>
-  view-progress works!
-</p>
+<div style="text-align: center;">
+	<ion-list>
+		<div *ngFor="let lessonName of lessonsUnique;let i=index" [attr.data-index]="i">
+			<button ion-item (click)="toggle(i)">
+				{{lessonName}}
+			</button>
+			<div class="div1">
+				<h2 class={{status}} *ngIf="bool[i]">
+				  Words learned: {{wordsLearned}}<br>
+				  Words in lesson: {{wordsInLesson}}
+				</h2>
+			</div>
+	</div>
+	</ion-list>
+</div>

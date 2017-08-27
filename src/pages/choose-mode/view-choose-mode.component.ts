@@ -27,8 +27,9 @@ export class ChooseModeComponent{
     this._loginService.setMode(m);
     this._navCtrl.push(ChooseLessonComponent);
 }
-  else
+else{
   this._navCtrl.push(ProgressComponent);
+}
 
 }
 
