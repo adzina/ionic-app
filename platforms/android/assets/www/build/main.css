@@ -25274,6 +25274,25 @@ button[type="submit"].false {
   background-color: tomato;
 }
 
+.div1 {
+  text-align: center;
+  padding-bottom: 0px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+h2.red {
+  background-color: tomato;
+}
+
+h2.yellow {
+  background-color: #ffff33;
+}
+
+h2.green {
+  background-color: lightgreen;
+}
+
 ion-buttons button[icon-only].my-style-for-modal {
   margin: 0 6px;
   min-width: 36px;

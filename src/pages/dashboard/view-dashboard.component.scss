@@ -1,7 +1,3 @@
-ion-buttons button[icon-only].my-style-for-modal {
-	margin: 0 6px;
-	min-width: 36px;
-}
 div.word_to_guess{
 	text-align: center;
 	font-size: 1000%;
@@ -45,4 +41,10 @@ button[type="submit"].false{
 	width:100%;
 	height:50px;
 	background-color: tomato;
+}
+input.true{
+	background-color:lightgreen;
+}
+input.false{
+	background-color:tomato;
 }
