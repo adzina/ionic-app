@@ -1,38 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
+<ion-navbar>
+    <img src="../../assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+    <ion-title class="titleicon" style="display:inline-block">Login</ion-title>
+</ion-navbar>
 </ion-header>
+<ion-content class="no-scroll">
 
+    <ion-list>
 
-<ion-content>
-  <ion-list>
+      <ion-item class="item">
+        <ion-label style="color:black" stacked class="alabel">Username</ion-label>
+        <ion-input type="text" name="username" [(ngModel)]="username"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Username</ion-label>
-      <ion-input type="text" name="username" [(ngModel)]="username"></ion-input>
-    </ion-item>
+      <ion-item class="item">
+        <ion-label style="color:black" stacked>Password</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
+    </ion-list>
 
-  </ion-list>
+    <div padding>
+      <button ion-button color="primary" block (click)="submit('student')">Sign in as student</button>
+      <button ion-button color="primary" block (click)="submit('teacher')">Sign in as teacher</button>
+    </div>
 
-  <div padding>
-    <button ion-button color="primary" block (click)="submit('student')">Sign in as student</button>
-    <button ion-button color="primary" block (click)="submit('teacher')">Sign in as teacher</button>
-  </div>
+    <br>
+    <br>
 
-  <br>
-  <br>
-
-  <h2 align="center">Do not have an account yet?</h2>
-  <div padding>
-	<button ion-button color="secondary" block (click)="register()">Register</button>
-  </div>
-
-
+    <h2 align="center">Do not have an account yet?</h2>
+    <div padding>
+  	<button ion-button style="background-color:#00b386" block (click)="register()">Register</button>
+    </div>
 
 </ion-content>

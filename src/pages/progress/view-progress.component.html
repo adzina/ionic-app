@@ -1,25 +1,30 @@
-<ion-navbar>
-	<ion-title>Your progress</ion-title>
-	<ion-buttons start>
-		 <button ion-button (click)="logout()">
-			 Logout
-		 </button>
-	 </ion-buttons>
+<ion-header>
+	<ion-navbar>
+		<img src="../../assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+		<ion-title class="titleicon" style="display:inline-block">Your progress</ion-title>
+		<ion-buttons start>
+			 <button ion-button  class="logout" (click)="logout()">
+				 Logout
+			 </button>
+		 </ion-buttons>
 
+	</ion-navbar>
 
-</ion-navbar>
-<div style="text-align: center;">
-	<ion-list>
-		<div *ngFor="let lessonName of lessonsUnique;let i=index" [attr.data-index]="i">
-			<button ion-item (click)="toggle(i)">
-				{{lessonName}}
-			</button>
-			<div class="div1">
-				<h2 class={{status}} *ngIf="bool[i]">
-				  Words learned: {{wordsLearned}}<br>
-				  Words in lesson: {{wordsInLesson}}
-				</h2>
-			</div>
+</ion-header>
+<ion-content class="no-scroll">
+	<div style="text-align: center;">
+		<ion-list>
+			<div *ngFor="let lessonName of lessonsUnique;let i=index" [attr.data-index]="i">
+				<button ion-item (click)="toggle(i)">
+					{{lessonName}}
+				</button>
+				<div class="div1">
+					<h2 class={{status}} *ngIf="bool[i]">
+					  Words learned: {{wordsLearned}}<br>
+					  Words in lesson: {{wordsInLesson}}
+					</h2>
+				</div>
+		</div>
+		</ion-list>
 	</div>
-	</ion-list>
-</div>
+</ion-content>

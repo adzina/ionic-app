@@ -25199,6 +25199,39 @@ ion-navbar.toolbar {
   }
 }
 
+.titleicon div {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.toolbar-background {
+  background-color: #ce2020;
+}
+
+.toolbar-title {
+  color: white;
+}
+
+.back-button {
+  color: white;
+}
+
+.logout {
+  color: white;
+}
+
+.item {
+  background-color: #cccccc;
+}
+
+.scroll-content {
+  background-color: #cccccc;
+}
+
+.no-scroll .scroll-content {
+  overflow: hidden;
+}
+
 div.word_to_guess {
   text-align: center;
   font-size: 1000%;
@@ -25277,6 +25310,10 @@ input.false {
   background-color: tomato;
 }
 
+page-hello-ionic {
+  background: #ce2020;
+}
+
 .div1 {
   text-align: center;
   padding-bottom: 0px;
@@ -25308,7 +25345,7 @@ ion-buttons button[icon-only].my-style-for-modal {
 
 .center {
   height: 100%;
-  padding: 30% 0;
+  padding: 40% 0;
   text-align: center;
 }
 

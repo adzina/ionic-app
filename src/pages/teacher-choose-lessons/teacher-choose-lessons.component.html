@@ -1,15 +1,20 @@
-<ion-navbar>
-	<ion-title>Choose lesson</ion-title>
-<ion-buttons start>
-		 <button ion-button (click)="logout()">
-			 Logout
-		 </button>
-	 </ion-buttons>
+<ion-header>
+	<ion-navbar>
+		<img src="../../assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+		<ion-title class="titleicon" style="display:inline-block">Choose lesson</ion-title>
+	<ion-buttons start>
+			 <button ion-button class="logout" (click)="logout()">
+				 Logout
+			 </button>
+		 </ion-buttons>
 
 
-</ion-navbar>
+	</ion-navbar>
+</ion-header>
+<ion-content>
     <ion-list>
       <button ion-item *ngFor="let lessonName of lessonsUnique" (click)="choose(lessonName)">
         {{lessonName}}
       </button>
     </ion-list>
+</ion-content>

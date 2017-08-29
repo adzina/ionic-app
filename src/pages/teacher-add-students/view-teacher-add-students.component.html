@@ -1,22 +1,22 @@
-<body>
+<ion-header>
   <ion-navbar>
-  	<ion-title>Add students</ion-title>
+    <img src="../../assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+    <ion-title class="titleicon" style="display:inline-block">Add students</ion-title>
     <ion-buttons start>
-  		 <button ion-button (click)="logout()">
+  		 <button ion-button class="logout" (click)="logout()">
   			 Logout
   		 </button>
   	 </ion-buttons>
 
 
   </ion-navbar>
+</ion-header>
 
-
-
+<ion-content>
   <div>
     <div *ngFor=" let student of students">
         {{student.name}}  {{student.surname}} <input type="checkbox" (click)="submit()">
 
     </div>
   </div>
-
-</body>
+</ion-content>

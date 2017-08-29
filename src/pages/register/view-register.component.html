@@ -1,7 +1,10 @@
-<ion-navbar>
-	<ion-title>Register</ion-title>
+<ion-header>
+	<ion-navbar>
+		<ion-title>Register</ion-title>
 
-</ion-navbar>
+	</ion-navbar>
+</ion-header>
+<ion-content class="no-scroll">
   <ion-item>
     <ion-label stacked>Name</ion-label>
     <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
@@ -32,3 +35,4 @@
   <button ion-button color="primary" block (click)="submit('student')">Register as student</button><br><br>
   <button ion-button color="primary" block (click)="submit('teacher')">Register as teacher</button>
 </div>
+</ion-content>

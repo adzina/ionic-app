@@ -1,15 +1,18 @@
-<body>
+
+<ion-header>
   <ion-navbar>
-  	<ion-title>Create lesson</ion-title>
+    <img src="../../assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+    <ion-title class="titleicon" style="display:inline-block">Create lesson</ion-title>
     <ion-buttons start>
-  		 <button ion-button (click)="logout()">
+  		 <button ion-button class="logout" (click)="logout()">
   			 Logout
   		 </button>
   	 </ion-buttons>
 
 
   </ion-navbar>
-
+</ion-header>
+<ion-content class="no-scroll">
   <ion-item>
     <ion-label stacked>Subject</ion-label>
     <ion-input type="text" name="subject" [(ngModel)]="subject"></ion-input>
@@ -21,6 +24,6 @@
 </ion-item>
 <div padding>
   <button ion-button (click)="create()">Create</button>
-</div>  
+</div>
 
-</body>
+</ion-content>
