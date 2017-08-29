@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
-import { ToastController } from 'ionic-angular';
 import {LoginService} from '../../services/login.service';
-import { NavController } from 'ionic-angular';
+import { NavController,ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'register',
@@ -45,7 +44,7 @@ export class RegisterComponent {
     presentToast() {
       let toast = this._toast.create({
           message: 'The account has been created, you can log in now',
-          duration: 5000,
+          duration: 2500,
           position: 'middle'
         });
     toast.present();

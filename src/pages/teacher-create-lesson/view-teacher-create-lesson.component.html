@@ -1,0 +1,26 @@
+<body>
+  <ion-navbar>
+  	<ion-title>Create lesson</ion-title>
+    <ion-buttons start>
+  		 <button ion-button (click)="logout()">
+  			 Logout
+  		 </button>
+  	 </ion-buttons>
+
+
+  </ion-navbar>
+
+  <ion-item>
+    <ion-label stacked>Subject</ion-label>
+    <ion-input type="text" name="subject" [(ngModel)]="subject"></ion-input>
+  </ion-item>
+
+<ion-item>
+    <ion-label stacked>Date</ion-label>
+    <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="today"></ion-datetime>
+</ion-item>
+<div padding>
+  <button ion-button (click)="create()">Create</button>
+</div>  
+
+</body>

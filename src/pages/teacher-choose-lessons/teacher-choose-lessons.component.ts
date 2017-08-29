@@ -48,10 +48,10 @@ export class TeacherChooseLessonsComponent {
   choose(lessonNr: string) {
     this._userService.chooseLesson(lessonNr);
       let op=this._userService.getOption();
-      if(op==0)
+      if(op==1)
         this._navCtrl.push(TeacherWordsPanelComponent);
 
-      if(op==1)
+      if(op==2)
         this._navCtrl.push(TeacherAddStudentsComponent);
   }
   logout(){

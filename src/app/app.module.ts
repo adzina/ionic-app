@@ -13,6 +13,7 @@ import {ChooseLessonComponent} from '../pages/choose-lesson/view-choose-lesson.c
 import {DashboardComponent} from '../pages/dashboard/view-dashboard.component';
 import {TeacherDashboardComponent} from '../pages/teacher-dashboard/view-teacher-dashboard.component';
 import {TeacherAddStudentsComponent} from '../pages/teacher-add-students/view-teacher-add-students.component';
+import {TeacherCreateLessonComponent} from '../pages/teacher-create-lesson/view-teacher-create-lesson.component';
 import {TeacherWordsPanelComponent} from '../pages/teacher-words-panel/view-teacher-words-panel.component';
 import {ProgressComponent} from '../pages/progress/view-progress.component';
 import {GoodbyeComponent} from '../pages/goodbye/view-goodbye.component';
@@ -35,6 +36,7 @@ import {UserService} from '../services/user.service';
     DashboardComponent,
     TeacherDashboardComponent,
     TeacherAddStudentsComponent,
+    TeacherCreateLessonComponent,
     TeacherWordsPanelComponent,
     GoodbyeComponent,
   ],
@@ -53,6 +55,7 @@ import {UserService} from '../services/user.service';
     ProgressComponent,
     DashboardComponent,
     TeacherDashboardComponent,
+    TeacherCreateLessonComponent,
     TeacherAddStudentsComponent,
     TeacherWordsPanelComponent,
     GoodbyeComponent

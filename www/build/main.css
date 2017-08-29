@@ -25305,3 +25305,14 @@ ion-buttons button[icon-only].my-style-for-modal {
   margin: 0 6px;
   min-width: 36px;
 }
+
+.center {
+  height: 100%;
+  padding: 20% 0;
+  text-align: center;
+}
+
+ion-buttons button[icon-only].my-style-for-modal {
+  margin: 0 6px;
+  min-width: 36px;
+}
