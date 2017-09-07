@@ -31,36 +31,16 @@ export class DashboardComponent{
                     { eng: "four", pol: "cztery", id: "4", lesson: "words1" },
                     { eng: "dog", pol: "pies", id: "5", lesson: "words2" },
                     { eng: "cat", pol: "kot", id: "6", lesson: "words2" }];
-    this.chosenLesson='null';
     this.ok=null;
     this.user=this._loginService.getUserName();
     this.clicked=false;
     this.lessonsFiltered=[];
     this.mode=this._loginService.getMode();
-    this.handleLessonChosen(this._userService.getLesson());
-
-
+    this.chosenLesson=this._userService.getLesson();
+    this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
+    this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
   }
 
-  handleLessonChosen(x:string){
-    if(this.chosenLesson=='null' || ( this.chosenLesson!='null' && this.clicked==true)){
-        if(x!=this.chosenLesson){
-        this.chosenLesson=x;
-    //===================================================================================================
-        this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
-    //===================================================================================
-        /*
-            student2words
-            findAll
-            in: lessonID, studentID
-            out: [wordID]
-
-        */
-      }
-        this.nextword();
-      }
-
-}
   assign(x:string){
     if(!this.clicked){
       this.clicked=true;
@@ -88,11 +68,17 @@ export class DashboardComponent{
      */
    }
   }
+  swipeEvent(e) {
+    if(e.direction == '2'){
+      this.nextword();
+    }
+}
   nextword(){
-    this.clicked=false;
-    this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
-    this.response=null;
-    this.ok=null;
+    if(this.clicked){
+      this.clicked=false;
+      this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
+      this.response=null;
+      this.ok=null;}
   }
   logout(){
     this._navCtrl.push(GoodbyeComponent);

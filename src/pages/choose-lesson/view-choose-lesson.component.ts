@@ -46,6 +46,9 @@ export class ChooseLessonComponent{
   }
   choose(lessonNr: string) {
     this._userService.chooseLesson(lessonNr);
+    this.pushDash();
+  }
+  pushDash(){
     this._navCtrl.push(DashboardComponent);
   }
   setmode(m:number){
@@ -67,7 +70,9 @@ export class ChooseLessonComponent{
           }).then(
             date => {this.until_date=date;
                     if(this.until_date>this.from_date)
-                      this._navCtrl.push(DashboardComponent);
+                      {
+                        this._userService.chooseLesson("words1");
+                        this._navCtrl.push(DashboardComponent);}
                     else
                       this.presentToast();
                     }

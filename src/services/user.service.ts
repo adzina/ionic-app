@@ -9,9 +9,9 @@ private lesson:string;
 private option: number;
 
 
-// Service message commands
 chooseLesson(lesson: string) {
   this.lesson=lesson;
+  alert("lesson chosen: "+this.lesson);
 }
 chooseOption(option: number) {
   this.option=option;

@@ -17,11 +17,6 @@ export class ChooseModeComponent{
   constructor(private _loginService: LoginService, public _navCtrl: NavController){
     this.mode=null;
   }
-  ngOnInit(){
-    if(this._loginService.getLoggedIn()==false){
-      //
-    }
-  }
   setmode(m:number){
     if(m!=2){
     this._loginService.setMode(m);
