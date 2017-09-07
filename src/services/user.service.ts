@@ -11,7 +11,6 @@ private option: number;
 
 chooseLesson(lesson: string) {
   this.lesson=lesson;
-  alert("lesson chosen: "+this.lesson);
 }
 chooseOption(option: number) {
   this.option=option;

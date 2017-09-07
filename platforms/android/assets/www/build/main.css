@@ -25270,9 +25270,6 @@ div.word_to_guess {
   -webkit-flex-basis: calc(50% - 40px);
   -ms-flex-preferred-size: calc(50% - 40px);
   flex-basis: calc(50% - 40px);
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 0px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
