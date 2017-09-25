@@ -9,8 +9,8 @@
     <ion-list>
 
       <ion-item class="item">
-        <ion-label style="color:black" stacked class="alabel">Username</ion-label>
-        <ion-input type="text" name="username" [(ngModel)]="username"></ion-input>
+        <ion-label style="color:black" stacked class="alabel">Email</ion-label>
+        <ion-input type="text" name="email" [(ngModel)]="email"></ion-input>
       </ion-item>
 
       <ion-item class="item">
@@ -21,10 +21,10 @@
     </ion-list>
 
     <div padding>
-      <button ion-button color="primary" block (click)="submit('student')">Sign in as student</button>
-      <button ion-button color="primary" block (click)="submit('teacher')">Sign in as teacher</button>
+      <button ion-button color="primary" block (click)="submit('student')">Sign in</button>
+      <!--<button ion-button color="primary" block (click)="submit('teacher')">Sign in as teacher</button>-->
     </div>
-
+<!--
     <br>
     <br>
 
@@ -32,5 +32,5 @@
     <div padding>
   	<button ion-button style="background-color:#00b386" block (click)="register()">Register</button>
     </div>
-
+-->
 </ion-content>

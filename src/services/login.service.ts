@@ -8,6 +8,7 @@ export class LoginService{
   name: string;
   userType: string;
   mode: number;
+  userID: string;
   constructor(){
 
   }
@@ -26,6 +27,9 @@ export class LoginService{
   getMode(){
     return this.mode;
   }
+  getUserID(){
+    return this.userID;
+  }
   setLoggedIn(loggedIn:boolean){
     this.loggedIn=loggedIn;
   };
@@ -36,6 +40,9 @@ export class LoginService{
   setUserType(userType:string){
     this.userType=userType;
 
+  }
+  setUserID(id:string){
+    this.userID=id;
   }
   setMode(mode:number){
     this.mode=mode;
