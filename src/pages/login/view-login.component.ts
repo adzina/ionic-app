@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {LoginService} from '../../services/login.service';
 import {ChooseModeComponent} from '../choose-mode/view-choose-mode.component';
 import { RegisterComponent} from '../register/view-register.component';
 import {TeacherDashboardComponent} from '../teacher-dashboard/view-teacher-dashboard.component';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'login',
@@ -19,7 +21,7 @@ export class LoginComponent{
   constructor(private _loginService: LoginService,
               private _navCtrl: NavController,
               private _toast: ToastController,
-              private http: HttpClient){
+              private http: Http){
     this.inputType = 'password';
     this.email="";
     this.password="";
@@ -36,10 +38,10 @@ export class LoginComponent{
 submit(type:string){
   var results: ItemsResponse;
   var first_name: string;
-  var http_string="http://localhost:1337/users/"+this.email
-  this.http.get<ItemsResponse>(http_string).subscribe(
+  var http_string="http://localhost:1337/users/"+this.email;
+  this.http.get(http_string).map(res => res.json()).subscribe(
     data => {
-
+        alert(this.password+'\n'+data.password);
         if(this.password==data.password){
             this._loginService.setUserType(type);
             this._loginService.setUserID(data.id);
