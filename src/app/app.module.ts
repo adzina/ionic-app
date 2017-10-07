@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
+import {IonicStorageModule} from '@ionic/storage'
 import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {DatePicker} from '@ionic-native/date-picker';
 import { ToastController } from 'ionic-angular';
@@ -45,6 +46,7 @@ import {UserService} from '../services/user.service';
   imports: [
     BrowserModule,
     HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(LanguageApp),
   ],
 

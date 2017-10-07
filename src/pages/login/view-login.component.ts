@@ -6,7 +6,9 @@ import {LoginService} from '../../services/login.service';
 import {ChooseModeComponent} from '../choose-mode/view-choose-mode.component';
 import { RegisterComponent} from '../register/view-register.component';
 import {TeacherDashboardComponent} from '../teacher-dashboard/view-teacher-dashboard.component';
-import { Http } from '@angular/http';
+import {Headers, Http} from "@angular/http";
+import {JwtHelper} from "angular2-jwt";
+import {Storage} from "@ionic/storage";
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -18,14 +20,25 @@ export class LoginComponent{
   inputType: string;
   email: string;
   password: string;
+  contentHeader = new Headers({"Content-Type": "application/json"});
+  error: string;
+  jwtHelper = new JwtHelper();
+  user: string;
   constructor(private _loginService: LoginService,
               private _navCtrl: NavController,
               private _toast: ToastController,
-              private http: Http){
+              private http: Http,
+              private storage: Storage){
     this.inputType = 'password';
     this.email="";
     this.password="";
     this._loginService.setLoggedIn(false);
+
+    storage.ready().then(() => {
+      storage.get('profile').then(profile => {
+        this.user = JSON.parse(profile);
+      }).catch(console.log);
+    });
   }
 
   hideShowPassword(){
@@ -36,28 +49,24 @@ export class LoginComponent{
   };
 
 submit(type:string){
-  var results: ItemsResponse;
-  var first_name: string;
-  var http_string="http://localhost:1337/users/"+this.email;
-  this.http.get(http_string).map(res => res.json()).subscribe(
-    data => {
-        alert(this.password+'\n'+data.password);
-        if(this.password==data.password){
-            this._loginService.setUserType(type);
-            this._loginService.setUserID(data.id);
-            this._loginService.setLoggedIn(true);
-            this._loginService.setUsername(data.first_name);
-            this._navCtrl.push(ChooseModeComponent);
-      }
-      else{
-        this.presentToast();
-      }
-    },
-    (error)=>{
-      this.presentToast();
+  var email=this.email;
+  var pswd=this.password;
+  let body = JSON.stringify({ email, pswd });
+  this.http.post('http://localhost:1337/user/login', body, { headers: this.contentHeader })
+      .map(res => res.json())
+      .subscribe(
+        data => {alert("kuku"),this.authSuccess(data.id_token),
+        this._navCtrl.push(ChooseModeComponent);},
+        err => {this.error = err, alert(err),this.presentToast()}
+      );
 
-    });
   };
+  authSuccess(token) {
+   this.error = null;
+   this.storage.set('token', token);
+   this.user = this.jwtHelper.decodeToken(token).username;
+   this.storage.set('profile', this.user);
+ }
   presentToast() {
     let toast = this._toast.create({
         message: 'Wrong credentials',
