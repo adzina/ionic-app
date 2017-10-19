@@ -5,7 +5,8 @@ import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {DatePicker} from '@ionic-native/date-picker';
 import { ToastController } from 'ionic-angular';
 import { LanguageApp } from './app.component';
-import {HttpModule} from '@angular/http';
+import { HttpModule, Http, RequestOptions,ConnectionBackend } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { HttpClient } from '@angular/common/http';
 
 import {TeacherChooseLessonsComponent} from '../pages/teacher-choose-lessons/teacher-choose-lessons.component';
@@ -26,7 +27,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {LoginService} from '../services/login.service';
 import {UserService} from '../services/user.service';
+import {BackendService} from '../services/backend.service';
 
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    /*
+        headerName: 'Authorization',
+        headerPrefix: 'bearer',
+        tokenGetter: (() => localStorage.getItem(this.tokenName)),
+        */
+  }), http, options);
+}
 @NgModule({
   declarations: [
     LanguageApp,
@@ -66,13 +77,18 @@ import {UserService} from '../services/user.service';
     TeacherWordsPanelComponent,
     GoodbyeComponent
   ],
-  providers: [
+  providers: [{
+   provide: AuthHttp,
+   useFactory: authHttpServiceFactory,
+   deps: [ Http, RequestOptions ]
+ },
     DatePicker,
     LoginComponent,
     ToastController,
     StatusBar,
     SplashScreen,
     LoginService,
+    BackendService,
     UserService,
     HttpModule,
     HttpClient,

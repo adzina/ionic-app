@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
-import {LoginService} from '../../services/login.service';
+import {UserService} from '../../services/user.service';
 import {ProgressComponent} from '../progress/view-progress.component';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
 import {ChooseLessonComponent} from '../choose-lesson/view-choose-lesson.component';
@@ -14,12 +14,12 @@ import {ChooseLessonComponent} from '../choose-lesson/view-choose-lesson.compone
 export class ChooseModeComponent{
 
   mode: number;
-  constructor(private _loginService: LoginService, public _navCtrl: NavController){
+  constructor(private _userService: UserService, public _navCtrl: NavController){
     this.mode=null;
   }
   setmode(m:number){
     if(m!=2){
-    this._loginService.setMode(m);
+    this._userService.setMode(m);
     this._navCtrl.push(ChooseLessonComponent);
 }
 else{

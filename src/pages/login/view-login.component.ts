@@ -7,6 +7,7 @@ import {ChooseModeComponent} from '../choose-mode/view-choose-mode.component';
 import { RegisterComponent} from '../register/view-register.component';
 import {TeacherDashboardComponent} from '../teacher-dashboard/view-teacher-dashboard.component';
 import {Headers, Http} from "@angular/http";
+import {AuthService} from "../../services/auth/auth";
 import {JwtHelper} from "angular2-jwt";
 import {Storage} from "@ionic/storage";
 import 'rxjs/add/operator/map';
@@ -24,11 +25,14 @@ export class LoginComponent{
   error: string;
   jwtHelper = new JwtHelper();
   user: string;
+  auth: AuthService;
   constructor(private _loginService: LoginService,
               private _navCtrl: NavController,
               private _toast: ToastController,
               private http: Http,
               private storage: Storage){
+
+    this.auth = AuthService;
     this.inputType = 'password';
     this.email="";
     this.password="";
@@ -55,8 +59,10 @@ submit(type:string){
   this.http.post('http://localhost:1337/user/login', body, { headers: this.contentHeader })
       .map(res => res.json())
       .subscribe(
-        data => {this.authSuccess(data.id_token),
-        this._navCtrl.push(ChooseModeComponent);},
+        data => {this.authSuccess(data.id_token);
+          this._loginService.setUserID(data.id);
+          this._navCtrl.push(ChooseModeComponent);
+        },
         err => {this.error = err, alert(err),this.presentToast()}
       );
 
@@ -64,8 +70,9 @@ submit(type:string){
   authSuccess(token) {
    this.error = null;
    this.storage.set('token', token);
-   this.user = this.jwtHelper.decodeToken(token).username;
-   this.storage.set('profile', this.user);
+  //  this.user = this.jwtHelper.decodeToken(token).user_name;
+  //  console.log(this.user);
+  // this.storage.set('profile', this.user);
  }
   presentToast() {
     let toast = this._toast.create({

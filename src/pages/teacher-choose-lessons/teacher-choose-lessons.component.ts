@@ -6,7 +6,7 @@ import {UserService} from '../../services/user.service';
 import {TeacherAddStudentsComponent} from '../teacher-add-students/view-teacher-add-students.component';
 import {TeacherWordsPanelComponent} from '../teacher-words-panel/view-teacher-words-panel.component';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
-
+import {Lesson} from '../../models/lesson';
 
 @Component({
   selector: 'teacher-choose-lessons',
@@ -45,7 +45,7 @@ export class TeacherChooseLessonsComponent {
 
 
   }
-  choose(lessonNr: string) {
+  choose(lessonNr: Lesson) {
     this._userService.chooseLesson(lessonNr);
       let op=this._userService.getOption();
       if(op==1)

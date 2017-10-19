@@ -4,6 +4,7 @@ import { LoginService } from '../../services/login.service';
 import {UserService} from '../../services/user.service';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
 
+import { Lesson } from '../../models/lesson';
 @Component({
   selector: 'teacher-words-panel',
   templateUrl: 'view-teacher-words-panel.component.html',
@@ -15,7 +16,7 @@ export class TeacherWordsPanelComponent {
   lessons: word[];
   lessonsFiltered: word[];
   lessonsUnique: string[];
-  chosenLesson: string;
+  chosenLesson: Lesson;
   constructor(
     private _loginService: LoginService,
     private _navCtrl: NavController,
@@ -26,7 +27,7 @@ export class TeacherWordsPanelComponent {
     this.chosenLesson=_userService.getLesson();
     //--------------------------------------------------------------------------------
     //pobierz z bazy danych tylko slowka z danej lekcji
-    this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
+    //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
     //------------------------------------------------------------------------------------
     /*
       GET words
@@ -42,7 +43,7 @@ export class TeacherWordsPanelComponent {
 
     var n={pol:this.polish,eng:this.english,lesson:this.chosenLesson,id:""};
 
-    this.lessonsFiltered.push({pol:this.polish,eng:this.english,lesson:this.chosenLesson,id:""});
+    //this.lessonsFiltered.push({pol:this.polish,eng:this.english,lesson:this.chosenLesson,id:""});
 
     //------------------------------------------------------------------------------
     /*

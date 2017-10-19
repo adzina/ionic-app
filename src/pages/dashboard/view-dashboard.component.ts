@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
-import {LoginService} from '../../services/login.service';
+import {BackendService} from '../../services/backend.service';
 import {UserService} from '../../services/user.service';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
-
+import {Lesson} from '../../models/lesson';
 
 @Component({
   selector: 'dashboard',
@@ -18,10 +18,10 @@ export class DashboardComponent{
   ok: boolean;
   user: string;
   clicked: boolean;
-  chosenLesson: string;
+  chosenLesson: Lesson;
   mode: number;
   constructor(
-    private _loginService: LoginService,
+    private _backendService: BackendService,
     private _userService: UserService,
     public _navCtrl: NavController){
     this.response=null;
@@ -32,12 +32,11 @@ export class DashboardComponent{
                     { eng: "dog", pol: "pies", id: "5", lesson: "words2" },
                     { eng: "cat", pol: "kot", id: "6", lesson: "words2" }];
     this.ok=null;
-    this.user=this._loginService.getUserName();
     this.clicked=false;
     this.lessonsFiltered=[];
-    this.mode=this._loginService.getMode();
+    this.mode=this._userService.getMode();
     this.chosenLesson=this._userService.getLesson();
-    this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
+    //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
     this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
   }
 
