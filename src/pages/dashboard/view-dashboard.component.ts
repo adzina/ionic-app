@@ -1,21 +1,23 @@
-import {Component} from '@angular/core';
-import { NavController} from 'ionic-angular';
-import {BackendService} from '../../services/backend.service';
-import {UserService} from '../../services/user.service';
-import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
-import {Lesson} from '../../models/lesson';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { BackendService } from '../../services/backend.service';
+import { UserService } from '../../services/user.service';
+import { GoodbyeComponent } from '../goodbye/view-goodbye.component';
+import { Lesson } from '../../models/lesson';
+import { Word } from '../../models/word';
 
 @Component({
   selector: 'dashboard',
   templateUrl: 'view-dashboard.component.html'
 })
 
-export class DashboardComponent{
-  lessons: word[];
-  lessonsFiltered: word[];
-  word: word;
+export class DashboardComponent {
+  words: Word[];
+  options: Word[];
+  wordToGuess: Word;
   response: string;
   ok: boolean;
+  wordsReady:boolean;
   user: string;
   clicked: boolean;
   chosenLesson: Lesson;
@@ -23,69 +25,86 @@ export class DashboardComponent{
   constructor(
     private _backendService: BackendService,
     private _userService: UserService,
-    public _navCtrl: NavController){
-    this.response=null;
-    this.lessons = [{ eng: "one", pol: "jeden", id: "1", lesson: "words1" },
-                    { eng: "two", pol: "dwa", id: "2", lesson: "words1" },
-                    { eng: "three", pol: "trzy", id: "3", lesson: "words1" },
-                    { eng: "four", pol: "cztery", id: "4", lesson: "words1" },
-                    { eng: "dog", pol: "pies", id: "5", lesson: "words2" },
-                    { eng: "cat", pol: "kot", id: "6", lesson: "words2" }];
-    this.ok=null;
-    this.clicked=false;
-    this.lessonsFiltered=[];
-    this.mode=this._userService.getMode();
-    this.chosenLesson=this._userService.getLesson();
-    //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
-    this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
-  }
-
-  assign(x:string){
-    if(!this.clicked){
-      this.clicked=true;
-      for(var i=0;i<this.lessons.length;i++){
-        if(x==this.lessons[i].pol){
-          this.response=this.lessons[i].pol;
-        }
+    public _navCtrl: NavController) {
+    this.response = null;
+    this.ok = null;
+    this.wordsReady=false;
+    this.clicked = false;
+    this.mode = this._userService.getMode();
+    this.chosenLesson = this._userService.getLesson();
+    this._backendService.getLessonsWords(this.chosenLesson.id).subscribe(
+      data => {
+        this.words = data;
+        this.prepareOptions();
       }
-     this.ok=this.response==this.word.pol ? true : false;
-     /*
-     student2words
-     findOne
-     in: wordID,studentID
-     out: attempts, guessed
-     if(this.ok && attempts==0){
-     UPDATE guessed=3;
-   }
-   if(this.ok && attempts!=0){
-   UPDATE attempts++;
-   UPDATE guessed++;
- }
- else{
-  UPDATE attempts++;
-}
-     */
-   }
+    )
+    //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
+    //this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
+  }
+  prepareOptions() {
+  this.options=[];
+    var length=this.words.length;
+    //rand to index wylosowanego slowa do odgadnięcia
+   var rand = Math.floor(Math.random() * length);
+
+    //how_far mówi o ile wyrazów w lewo lub w prawo od wybranego slowa się przesuniemy
+   var how_far = Math.floor(Math.random() * 4);
+   console.log("rand:"+rand);
+   console.log("how_far:"+how_far);
+    this.wordToGuess = this.words[rand];
+    // var j=0;
+    // if(rand+how_far>=length){
+    //   for(var i=0;i<=rand+how_far-length;i++)
+    //   {
+    //     this.options[j]=this.words[i];
+    //     j++;
+    //   }
+    //   for(var i=rand-(3-how_far);i<length;i++){
+    //     this.options[j]=this.words[i];
+    //     j++;
+    //   }
+    // }
+    // else if(rand-(3-how_far)<0){
+    //   for(var i=rand;(i<rand+(3-how_far) && i<length);i++){
+    //     this.options[j]=this.words[i];
+    //     j++;
+    //   }
+    //   for(var i=0;i<rand;i++){
+    //     this.options[j]=this.words[i];
+    //     j++;
+    //   }
+    // }
+    // else{
+    //       for(var i=rand-(3-how_far);i<=rand+how_far;i++){
+    //           this.options[j]=this.words[i];
+    //           j++;
+    //         }
+    //
+    //   }
+      this.wordsReady=true;
+      this.options=this.words;
+  }
+  assign(x: string) {
+    if (!this.clicked) {
+      this.clicked = true;
+      this.response=x;
+      this.ok = this.response == this.wordToGuess.polish ? true : false;
+    }
   }
   swipeEvent(e) {
-    if(e.direction == '2'){
+    if (e.direction == '2') {
       this.nextword();
     }
-}
-  nextword(){
-    if(this.clicked){
-      this.clicked=false;
-      this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
-      this.response=null;
-      this.ok=null;}
   }
-  logout(){
+  nextword() {
+    if (this.clicked) {
+      this.clicked = false;
+      this.prepareOptions();
+      this.response = null;
+      this.ok = null;
+    }
+  }
+  logout() {
     this._navCtrl.push(GoodbyeComponent);
   }
-}
-interface word {
-  pol:string;
-  eng:string;
-  id:string;
-  lesson:string;
 }

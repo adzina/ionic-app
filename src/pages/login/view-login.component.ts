@@ -63,7 +63,7 @@ submit(type:string){
           this._loginService.setUserID(data.id);
           this._navCtrl.push(ChooseModeComponent);
         },
-        err => {this.error = err, alert(err),this.presentToast()}
+        err => {this.error = err, this.presentToast()}
       );
 
   };

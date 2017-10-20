@@ -21,22 +21,10 @@ export class BackendService{
                 this.auth = AuthService;
               }
 
-  getMyLessons() {
-
-    var userID=this._loginService.getUserID();
-    // Use authHttp to access secured routes
-    this.storage.get('token').then((token) => {
-      let headers = new Headers();
-      headers.append('Authorization', 'Bearer ' + token);
-
-      this.http.get(this.g_url+'user', {
-        headers: headers
-      }).map(res => res.text())
-        .subscribe(
-        );
-    })
-  }
-  getAllMyGroups():Observable<Lesson[]>{
+  //modeluje wydobywanie danych z podwójnej relacji wiele do wielu
+  //pobiera wszystkie grupy studenta, a potem dla każdej grupy pobiera wszystkie lekcje
+  //zwraca wszystkie lekcje studenta
+  getAllMyLessons():Observable<Lesson[]>{
     var url=this.g_url+'groupUser/getAll';
     var id=this._loginService.getUserID();
     var body=JSON.stringify({userID: id});
@@ -67,35 +55,28 @@ export class BackendService{
 
 
   }
-  getLessonsWords():Observable<any[]>{
-    return null;
-    // var url=this.g_url+'groupUser/getAll';
-    // var id=this._loginService.getUserID();
-    // var body=JSON.stringify({userID: id});
-    //
-    // var url2=this.g_url+'groupLesson/getGroupsLessons';
-    // return Observable.create((observer: Observer<any>) => {
-    //
-    //    this.storage.get('token').then(token => {
-    //
-    //
-    //       let headers = new Headers();
-    //      headers.append('Authorization', 'Bearer ' + token);
-    //
-    //      this.http.post(url, {headers: headers},{body:body})
-    //       .flatMap((res:Response)=>res.json())
-    //       .flatMap((group:Group)=>
-    //                this.http.post(url2, {headers: headers},{body:JSON.stringify({groupID:group.id})}),
-    //                (group:Group,resp:Response)=>resp.json()
-    //              )
-    //       .subscribe(result => {
-    //             observer.next(result);
-    //             observer.complete();
-    //         });
-    //
-    //
-    //    })
-    //  })
+  getLessonsWords(lessonID:string): Observable<Word[]>{
+    var url=this.g_url+'lessonword/getLessonsWords';
+    var body=JSON.stringify({lessonID:lessonID});
+
+    return Observable.create((observer: Observer<any>) => {
+
+       this.storage.get('token').then(token => {
+
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + token);
+
+         this.http.post(url, {headers: headers},{body:body})
+          .map((res:Response)=>res.json())
+          .subscribe(result => {
+                observer.next(result);
+                observer.complete();
+            });
+
+
+       })
+     })
+
 
 
   }

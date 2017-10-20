@@ -31,7 +31,7 @@ export class ChooseLessonComponent{
                 // this.lessonsUnique=[];
                 // this.onlyUniqueLessons();
                 //------------------------------------------------------------------------------
-                this._backendService.getAllMyGroups().subscribe(data=>{
+                this._backendService.getAllMyLessons().subscribe(data=>{
                   this.lessons=data;
                 });
 

@@ -13,14 +13,14 @@
 </ion-header>
 <ion-content class="no-scroll" (swipe)="swipeEvent($event)">
 
-			 <div class="word_to_guess">{{word.eng}}</div>
+			 <div class="word_to_guess" *ngIf="wordsReady">{{wordToGuess.english}}</div>
 
 			 <br><br>
 
-			 <div class="grid2x2" *ngIf="!mode">
+			 <div class="grid2x2" *ngIf="!mode && wordsReady">
 									<!-- iteruje po wszystkich opcjach z tablicy i tworzy kolejne przyciski wg wzoru-->
-									<div *ngFor=" let word of lessonsFiltered">
-											<button ion-button round type="submit" class={{ok}} (click)="assign(word.pol)">{{word.pol}}</button>
+									<div *ngFor=" let word of options">
+											<button ion-button round type="submit" class={{ok}} (click)="assign(word.polish)">{{word.polish}}</button>
 									</div>
 			</div>
 
@@ -32,7 +32,7 @@
 
 
 			<div class="response" *ngIf="clicked">
-									<p align="center">Correct response: {{word.pol}}</p>
+									<p align="center">Correct response: {{wordToGuess.polish}}</p>
 									<button ion-button block (click)="nextword()"> NEXT >> </button>
 			</div>
 </ion-content>
