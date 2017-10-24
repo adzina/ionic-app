@@ -19,8 +19,12 @@ export class BackendService{
               private http:Http,
               private storage:Storage){
                 this.auth = AuthService;
+                this.http.get('assets/config.json')
+                .map(res => res.json())
+                .subscribe((api_data) => {
+                  this.g_url = api_data.apiUrl;
+                });
               }
-
   //modeluje wydobywanie danych z podwójnej relacji wiele do wielu
   //pobiera wszystkie grupy studenta, a potem dla każdej grupy pobiera wszystkie lekcje
   //zwraca wszystkie lekcje studenta

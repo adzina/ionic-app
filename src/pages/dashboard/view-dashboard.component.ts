@@ -39,7 +39,6 @@ export class DashboardComponent {
       }
     )
     //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
-    //this.word=this.lessonsFiltered[Math.floor(Math.random()*this.lessonsFiltered.length)];
   }
   prepareOptions() {
   this.options=[];
