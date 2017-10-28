@@ -41,7 +41,6 @@ export class BackendService{
 
           let headers = new Headers();
          headers.append('Authorization', 'Bearer ' + token);
-
          this.http.post(url, {headers: headers},{body:body})
           .flatMap((res:Response)=>res.json())
           .flatMap((group:Group)=>
@@ -76,35 +75,28 @@ export class BackendService{
                 observer.next(result);
                 observer.complete();
             });
-
-
        })
      })
-
-
-
   }
-  // getAllMyLessons(myGroups:Group[]):Observable<Lesson[]>{
-  //   var url=this.g_url+'groupLesson/getAllMyLessons';
-  //   var body=JSON.stringify({groupID:myGroups});
-  //
-  //   return Observable.create((observer: Observer<any>) => {
-  //
-  //      this.storage.get('token').then(token => {
-  //
-  //
-  //         let headers = new Headers();
-  //        headers.append('Authorization', 'Bearer ' + token);
-  //
-  //        this.http.post(url, {headers: headers},{body:body})
-  //         .map((res:Response)=>res.json())
-  //         .subscribe(result => {
-  //               observer.next(result);
-  //               observer.complete();
-  //           });
-  //
-  //
-  //      })
-  //    })
-  // }
+  addOrUpdateStudentWord(guessed:boolean,studentID:string,wordID:string){
+    var url=this.g_url+'studentword/addOrUpdateStudentWord';
+
+    var body=JSON.stringify({guessed:guessed,studentID:studentID,wordID:wordID});
+    return Observable.create((observer: Observer<any>) => {
+      this.storage.get('token').then(token => {
+
+       let headers = new Headers();
+       headers.append('Authorization', 'Bearer ' + token);
+
+        this.http.post(url, {headers: headers},{body:body})
+         .subscribe(result => {
+           console.log(result);
+               observer.next(result);
+               observer.complete();
+           });
+      })
+    })
+  }
+
+
 }

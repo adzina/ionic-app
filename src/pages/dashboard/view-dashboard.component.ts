@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BackendService } from '../../services/backend.service';
+import { LoginService } from '../../services/login.service';
 import { UserService } from '../../services/user.service';
 import { GoodbyeComponent } from '../goodbye/view-goodbye.component';
 import { Lesson } from '../../models/lesson';
@@ -24,6 +25,7 @@ export class DashboardComponent {
   mode: number;
   constructor(
     private _backendService: BackendService,
+    private _loginService: LoginService,
     private _userService: UserService,
     public _navCtrl: NavController) {
     this.response = null;
@@ -94,11 +96,15 @@ export class DashboardComponent {
     }
   }
   nextword() {
+    var userID=this._loginService.getUserID();
     if (this.clicked) {
-      this.clicked = false;
-      this.prepareOptions();
-      this.response = null;
-      this.ok = null;
+      this._backendService.addOrUpdateStudentWord(this.ok,userID,this.wordToGuess.id).subscribe(data=>{
+
+        this.clicked = false;
+        this.prepareOptions();
+        this.response = null;
+        this.ok = null;
+      })
     }
   }
   logout() {
