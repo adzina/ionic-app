@@ -78,6 +78,26 @@ export class BackendService{
        })
      })
   }
+  getAllGuessed(studentID:string): Observable<any[]>{
+    var url=this.g_url+'studentword/getAllGuessed';
+    var body=JSON.stringify({studentID:studentID});
+
+    return Observable.create((observer: Observer<any>) => {
+
+       this.storage.get('token').then(token => {
+
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + token);
+
+         this.http.post(url, {headers: headers},{body:body})
+          .map((res:Response)=>res.json())
+          .subscribe(result => {
+                observer.next(result);
+                observer.complete();
+            });
+       })
+     })
+  }
   addOrUpdateStudentWord(guessed:boolean,studentID:string,wordID:string){
     var url=this.g_url+'studentword/addOrUpdateStudentWord';
 
