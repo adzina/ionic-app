@@ -35,14 +35,15 @@ export class DashboardComponent {
     this.ok = null;
     this.wordsReady = false;
     this.clicked = false;
+    this.allWords=[];
+    this.words=[];
     this.mode = this._userService.getMode();
     this.chosenLesson = this._userService.getLesson();
     this._backendService.getLessonsWords(this.chosenLesson.id).subscribe(
       data => {
         this.allWords = data;
-        this.words = data;
+        this.words = this.allWords.concat();
         this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
-          console.log(guessed);
           if (guessed != null) {
             for (var i = 0; i < guessed.length; i++) {
               for (var j = 0; j < this.words.length; j++) {
@@ -61,8 +62,9 @@ export class DashboardComponent {
   prepareOptions() {
     this.options = [];
     var length = this.allWords.length;
+    console.log(this.allWords);
     //rand to index wylosowanego slowa do odgadnięcia
-    var rand = Math.floor(Math.random() * length);
+    var rand = Math.floor(Math.random() * this.words.length);
 
     //how_far mówi o ile wyrazów w lewo lub w prawo od wybranego slowa się przesuniemy
     var how_far = Math.floor(Math.random() * 4);

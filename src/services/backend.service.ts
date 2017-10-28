@@ -72,6 +72,7 @@ export class BackendService{
          this.http.post(url, {headers: headers},{body:body})
           .map((res:Response)=>res.json())
           .subscribe(result => {
+            console.log(result);
                 observer.next(result);
                 observer.complete();
             });
