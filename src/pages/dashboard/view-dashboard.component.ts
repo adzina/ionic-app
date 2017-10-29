@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { GoodbyeComponent } from '../goodbye/view-goodbye.component';
 import { Lesson } from '../../models/lesson';
 import { Word } from '../../models/word';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'dashboard',
@@ -30,6 +31,7 @@ export class DashboardComponent {
     private _backendService: BackendService,
     private _loginService: LoginService,
     private _userService: UserService,
+    private _toast: ToastController,
     public _navCtrl: NavController) {
     this.response = null;
     this.ok = null;
@@ -53,16 +55,28 @@ export class DashboardComponent {
               }
             }
           }
-          this.prepareOptions();
+          if(this.words.length!=0)
+            this.prepareOptions();
+          else{
+              this.presentToast();
+          }
         })
       }
     )
     //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
   }
+
+   presentToast() {
+     let toast = this._toast.create({
+         message: 'All words from this lesson have been memorised, choose \'Revise\' to access them again ',
+         duration: 5000,
+         position: 'middle'
+       });
+   toast.present();
+ }
   prepareOptions() {
     this.options = [];
     var length = this.allWords.length;
-    console.log(this.allWords);
     //rand to index wylosowanego slowa do odgadnięcia
     var rand = Math.floor(Math.random() * this.words.length);
 
@@ -70,33 +84,38 @@ export class DashboardComponent {
     var how_far = Math.floor(Math.random() * 4);
     this.wordToGuess = this.words[rand];
     var j = 0;
-    if (rand + how_far >= length) {
-      for (var i = 0; i <= rand + how_far - length; i++) {
-        this.options[j] = this.allWords[i];
-        j++;
-      }
-      for (var i = rand - (3 - how_far); i < length; i++) {
+    var i;
+    if (rand + how_far < length && rand - (3-how_far)>=0) {
+      for (i = rand-(3-how_far); i <= rand + how_far; i++) {
         this.options[j] = this.allWords[i];
         j++;
       }
     }
-    else if (rand - (3 - how_far) < 0) {
-      for (var i = length + rand - (3 - how_far); i < length; i++) {
+    else if (rand + how_far < length && rand- (3-how_far)<0) {
+      for (i = length -1 + rand - (3 - how_far); i < length; i++) {
         this.options[j] = this.allWords[i];
         j++;
       }
-      for (var i = 0; i < rand + how_far; i++) {
+      for (i = 0; i < rand + how_far; i++) {
         this.options[j] = this.allWords[i];
         j++;
       }
-      if (rand == 0 || how_far == 0) this.options[j] = this.words[rand];
     }
-    else {
-      for (var i = rand - (3 - how_far); i <= rand + how_far; i++) {
+    else if(rand + how_far >= length && rand - (3 - how_far) >=0 ) {
+      for (i = rand - (3 - how_far); i < length; i++) {
+        this.options[j] = this.allWords[i];
+        j++;
+      }
+      for (i=0;i<=rand+how_far-length;i++){
         this.options[j] = this.allWords[i];
         j++;
       }
 
+    }
+    else{
+      for(i=0;i<length;i++){
+        this.options[i] = this.allWords[i];
+      }
     }
     this.wordsReady = true;
   }
