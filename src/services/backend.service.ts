@@ -39,12 +39,15 @@ export class BackendService{
        this.storage.get('token').then(token => {
 
 
-          let headers = new Headers();
-         headers.append('Authorization', 'Bearer ' + token);
-         this.http.post(url, {headers: headers},{body:body})
+        let headers = new Headers();
+         headers.append('authorization', 'Bearer ' + token);
+
+         let options = new RequestOptions({ headers: headers });
+
+         this.http.post(url, body, options)
           .flatMap((res:Response)=>res.json())
           .flatMap((group:Group)=>
-                   this.http.post(url2, {headers: headers},{body:JSON.stringify({groupID:group.id})}),
+                   this.http.post(url2,JSON.stringify({groupID:group.id}),options),
                    (group:Group,resp:Response)=>resp.json()
                  )
           .subscribe(result => {
@@ -67,9 +70,11 @@ export class BackendService{
        this.storage.get('token').then(token => {
 
         let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + token);
+        headers.append('authorization', 'Bearer ' + token);
 
-         this.http.post(url, {headers: headers},{body:body})
+        let options = new RequestOptions({ headers: headers });
+
+         this.http.post(url, body, options)
           .map((res:Response)=>res.json())
           .subscribe(result => {
                 observer.next(result);
@@ -87,9 +92,9 @@ export class BackendService{
        this.storage.get('token').then(token => {
 
         let headers = new Headers();
-        headers.append('Authorization', 'Bearer ' + token);
-
-         this.http.post(url, {headers: headers},{body:body})
+        headers.append('authorization', 'Bearer ' + token);
+        let options = new RequestOptions({headers:headers});
+         this.http.post(url,body,options)
           .map((res:Response)=>res.json())
           .subscribe(result => {
                 observer.next(result);
@@ -106,9 +111,10 @@ export class BackendService{
       this.storage.get('token').then(token => {
 
        let headers = new Headers();
-       headers.append('Authorization', 'Bearer ' + token);
+       headers.append('authorization', 'Bearer ' + token);
+       let options = new RequestOptions({headers:headers});
 
-        this.http.post(url, {headers: headers},{body:body})
+        this.http.post(url, body, options)
          .subscribe(result => {
                observer.next(result);
                observer.complete();
