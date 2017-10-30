@@ -14,12 +14,18 @@
 </ion-header>
 <ion-content>
   <div padding *ngIf="mode==null">
+
+    <div padding style="margin-bottom:20%">
+    </div>
     <button ion-button color="primary" block (click)="setmode(0)">From date to date</button>
     <button ion-button color="primary" block (click)="setmode(1)">Specific lesson</button>
   </div>
 
 
   	 <div *ngIf="mode==0" style="text-align: center;">
+
+     	<div padding style="margin-bottom:20%">
+     	</div>
   		 <button ion-button (click)="from()">From</button>
   		 <button ion-button (click)="until()">Until</button>
   	 </div>

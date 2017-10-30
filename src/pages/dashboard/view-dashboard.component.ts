@@ -27,6 +27,7 @@ export class DashboardComponent {
   clicked: boolean;
   chosenLesson: Lesson;
   mode: number;
+  modeWords:number;
   constructor(
     private _backendService: BackendService,
     private _loginService: LoginService,
@@ -41,26 +42,32 @@ export class DashboardComponent {
     this.words=[];
     this.mode = this._userService.getMode();
     this.chosenLesson = this._userService.getLesson();
+    this.modeWords = this._userService.getModeWords();
     this._backendService.getLessonsWords(this.chosenLesson.id).subscribe(
       data => {
         this.allWords = data;
         this.words = this.allWords.concat();
-        this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
-          if (guessed != null) {
-            for (var i = 0; i < guessed.length; i++) {
-              for (var j = 0; j < this.words.length; j++) {
-                if (this.words[j].id == guessed[i].wordID) {
-                  this.words.splice(j, 1); break;
+        if(this.modeWords){
+            this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
+              if (guessed != null) {
+                for (var i = 0; i < guessed.length; i++) {
+                  for (var j = 0; j < this.words.length; j++) {
+                    if (this.words[j].id == guessed[i].wordID) {
+                      this.words.splice(j, 1); break;
+                    }
+                  }
                 }
               }
-            }
-          }
-          if(this.words.length!=0)
-            this.prepareOptions();
-          else{
-              this.presentToast();
-          }
-        })
+              if(this.words.length!=0)
+                this.prepareOptions();
+              else{
+                  this.presentToast();
+              }
+            })
+        }
+        else{
+          this.prepareOptions();
+        }
       }
     )
     //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
@@ -85,23 +92,23 @@ export class DashboardComponent {
     this.wordToGuess = this.words[rand];
     var j = 0;
     var i;
-    if (rand + how_far < length && rand - (3-how_far)>=0) {
+    if (rand + how_far < length && rand - (3-how_far)>=0) {console.log("pierwszy");
       for (i = rand-(3-how_far); i <= rand + how_far; i++) {
         this.options[j] = this.allWords[i];
         j++;
       }
     }
-    else if (rand + how_far < length && rand- (3-how_far)<0) {
-      for (i = length -1 + rand - (3 - how_far); i < length; i++) {
+    else if (rand + how_far < length && rand- (3-how_far)<0) {console.log("drugi");
+      for (i = length + rand - (3 - how_far); i < length; i++) {
         this.options[j] = this.allWords[i];
         j++;
       }
-      for (i = 0; i < rand + how_far; i++) {
+      for (i = 0; i <= rand + how_far; i++) {
         this.options[j] = this.allWords[i];
         j++;
       }
     }
-    else if(rand + how_far >= length && rand - (3 - how_far) >=0 ) {
+    else if(rand + how_far >= length && rand - (3 - how_far) >=0 ) {console.log("trzeci");
       for (i = rand - (3 - how_far); i < length; i++) {
         this.options[j] = this.allWords[i];
         j++;
@@ -112,11 +119,15 @@ export class DashboardComponent {
       }
 
     }
-    else{
+    else{console.log("czwarty");
       for(i=0;i<length;i++){
         this.options[i] = this.allWords[i];
       }
     }
+    console.log(this.words);
+    console.log("rand"+rand);
+    console.log("how_far"+how_far);
+    console.log(this.options);
     this.wordsReady = true;
   }
   assign(x: string) {
@@ -137,7 +148,7 @@ export class DashboardComponent {
     if (this.clicked) {
       this._backendService.addOrUpdateStudentWord(this.ok, userID, this.wordToGuess.id).subscribe(data => {
         this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
-          if (guessed != null) {
+          if (guessed != null && this.modeWords) {
             for (var i = 0; i < guessed.length; i++) {
               for (var j = 0; j < this.words.length; j++) {
                 if (this.words[j].id == guessed[i].wordID) {

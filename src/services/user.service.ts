@@ -9,7 +9,7 @@ export class UserService{
 private lesson:Lesson;
 private option: number;
 private mode: number;
-
+private modeWords: number;
 chooseLesson(lesson: Lesson) {
   this.lesson=lesson;
 }
@@ -25,11 +25,14 @@ getLesson(){
 getMode(){
   return this.mode;
 }
+getModeWords(){
+  return this.modeWords;
+}
 
 setMode(mode:number){
   this.mode=mode;
 }
-goback(){
-//  this._navCtrl.pop();
+setModeWords(mode:number){
+  this.modeWords=mode;
 }
 }

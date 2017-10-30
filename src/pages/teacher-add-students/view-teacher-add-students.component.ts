@@ -31,9 +31,9 @@ export class TeacherAddStudentsComponent{
     jeśli student znajduje się na pierwszej i drugiej liście, to obok jego nazwiska przycisk "remove" wpp "add"
     */
   }
-  goback(){
-    this._userService.goback();
-  }
+  // goback(){
+  //   this._userService.goback();
+  // }
   logout(){
     this._navCtrl.push(GoodbyeComponent);
   }

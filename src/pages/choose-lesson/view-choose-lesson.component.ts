@@ -8,7 +8,7 @@ import {DashboardComponent} from '../dashboard/view-dashboard.component';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
 import { Group } from '../../models/group';
 import { Lesson } from '../../models/lesson';
-
+import {ChooseRevisionLearningComponent} from '../choose-revision-learning/view-choose-revision-learning.component';
 @Component({
   selector: 'choose-lesson',
   templateUrl: 'view-choose-lesson.component.html',
@@ -41,10 +41,7 @@ export class ChooseLessonComponent{
   choose(i: number) {
     var lessonChosen=this.lessons[i];
     this._userService.chooseLesson(lessonChosen);
-    this.pushDash();
-  }
-  pushDash(){
-    this._navCtrl.push(DashboardComponent);
+    this._navCtrl.push(ChooseRevisionLearningComponent);
   }
   setmode(m:number){
     this.mode=m;

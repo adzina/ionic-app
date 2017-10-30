@@ -1,0 +1,27 @@
+<ion-header>
+<ion-navbar>
+	<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+	<ion-title class="titleicon" style="display:inline-block">Revision or Learning?</ion-title>
+<ion-buttons start>
+		 <button ion-button class="logout" (click)="logout()">
+			 Logout
+		 </button>
+	 </ion-buttons>
+
+
+</ion-navbar>
+</ion-header>
+
+<ion-content text-center>
+	<ion-grid>
+	<div padding style="margin-bottom:20%">
+	</div>
+	<div padding>
+		<h4><i>In Revision mode you can access all words from this lesson.</i></h4>
+	  <button ion-button color="primary" block (click)="setmode(0)">Revision</button>
+		<br>
+		<h4><i>In Learning mode you can access only words you haven't mastered yet.</i></h4>
+	  <button ion-button color="primary" block (click)="setmode(1)">Learning</button>
+	</div>
+</ion-grid>
+</ion-content>
