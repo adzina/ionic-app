@@ -23,7 +23,11 @@
         <ion-label style="color:black" stacked>Password</ion-label>
         <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
       </ion-item>
-
+      <ion-item class="item">
+        <ion-label style="color:black" stacked>Domyślne url: <b>http://localhost:1337/</b><br>
+        Żeby zmienić na np <b>http://192.178.1.17:1337/</b> wpisz <b>192.178.1.17</b> poniżej</ion-label>
+    		  <ion-input type="text" name="url" [(ngModel)]="url" placeholder="Wpisz url"></ion-input>
+      </ion-item>
     </ion-list>
 
     <div padding>

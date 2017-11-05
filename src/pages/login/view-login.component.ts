@@ -3,6 +3,7 @@ import { NavController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import {LoginService} from '../../services/login.service';
+import { BackendService } from '../../services/backend.service';
 import {ChooseModeComponent} from '../choose-mode/view-choose-mode.component';
 import { RegisterComponent} from '../register/view-register.component';
 import {TeacherDashboardComponent} from '../teacher-dashboard/view-teacher-dashboard.component';
@@ -26,8 +27,10 @@ export class LoginComponent{
   jwtHelper = new JwtHelper();
   user: string;
   auth: AuthService;
+  url: string;
   constructor(private _loginService: LoginService,
               private _navCtrl: NavController,
+              private _backendService: BackendService,
               private _toast: ToastController,
               private http: Http,
               private storage: Storage){
@@ -56,12 +59,17 @@ submit(type:string){
   var email=this.email;
   var pswd=this.password;
   let body = JSON.stringify({ email, pswd });
-  var url;
+
+  if(this.url){
+        var x='http://'+this.url+':1337/';
+            this._backendService.setApiUrl(x);
+    }
+    this.url=this._backendService.getApiUrl()+'user/login';
+
   this.http.get('assets/config.json')
   .map(res => res.json())
   .subscribe((api_data) => {
-    url = api_data.apiUrl+'user/login';
-     this.http.post(url, body, { headers: this.contentHeader })
+     this.http.post(this.url, body, { headers: this.contentHeader })
           .map(res => res.json())
           .subscribe(
             data => {this.authSuccess(data.id_token);

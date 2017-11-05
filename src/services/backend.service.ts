@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BackendService{
 
-g_url="http://192.168.1.17:1337/";
+g_url="http://localhost:1337/";
   auth: AuthService;
   allWords=[];
   constructor(private _loginService:LoginService,
@@ -22,10 +22,12 @@ g_url="http://192.168.1.17:1337/";
                 this.auth = AuthService;
 
               }
-  //pobieranie slowek od daty do daty:
-    //1. pobierz wszystkie lekcje studenta    getAllMyLessons
-    //2. odfiltruj lekcje poza zakresem dat
-    //3. dla kazdej lekcji pobierz slowka     getWords
+getApiUrl(){
+                  return this.g_url;
+                }
+setApiUrl(url:string){
+                  this.g_url=url;
+                }
   getAllMyGroups(): Observable<Group[]>{
     var url=this.g_url+'groupUser/getAll';
     var id=this._loginService.getUserID();
