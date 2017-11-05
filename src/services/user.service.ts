@@ -6,11 +6,11 @@ import {Lesson} from '../models/lesson';
 @Injectable()
 
 export class UserService{
-private lesson:Lesson;
+private lesson:Lesson[];
 private option: number;
 private mode: number;
 private modeWords: number;
-chooseLesson(lesson: Lesson) {
+chooseLesson(lesson: Lesson[]) {
   this.lesson=lesson;
 }
 chooseOption(option: number) {

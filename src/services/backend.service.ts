@@ -13,21 +13,27 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BackendService{
 
-  g_url='http://localhost:1337/';
+g_url="http://192.168.1.17:1337/";
   auth: AuthService;
+  allWords=[];
   constructor(private _loginService:LoginService,
               private http:Http,
               private storage:Storage){
                 this.auth = AuthService;
-                this.http.get('assets/config.json')
-                .map(res => res.json())
-                .subscribe((api_data) => {
-                  this.g_url = api_data.apiUrl;
-                });
+
               }
-  //modeluje wydobywanie danych z podwójnej relacji wiele do wielu
-  //pobiera wszystkie grupy studenta, a potem dla każdej grupy pobiera wszystkie lekcje
-  //zwraca wszystkie lekcje studenta
+  //pobieranie slowek od daty do daty:
+    //1. pobierz wszystkie lekcje studenta    getAllMyLessons
+    //2. odfiltruj lekcje poza zakresem dat
+    //3. dla kazdej lekcji pobierz slowka     getWords
+  getAllMyGroups(): Observable<Group[]>{
+    var url=this.g_url+'groupUser/getAll';
+    var id=this._loginService.getUserID();
+    var body=JSON.stringify({userID: id});
+    return this.http.post(url,body)
+    .map((res:Response)=>res.json())
+
+  }
   getAllMyLessons():Observable<Lesson[]>{
     var url=this.g_url+'groupUser/getAll';
     var id=this._loginService.getUserID();
@@ -61,6 +67,36 @@ export class BackendService{
 
 
   }
+
+  getAllLessonsWords(lessons:Lesson[]):Observable<Word[]>{
+    var resp=[];
+    var that=this;
+    if(lessons.length==1){
+      return this.getLessonsWords(lessons[0].id);
+    }
+    return Observable.create((observer: Observer<any>)=>{
+      async.each(lessons, function (lesson, cb) {
+          that.getLessonsWords(lesson.id)
+          .subscribe(data=>{
+            resp.push.apply(resp, data);//dziala jak pythonowe extend
+            cb();
+          })
+
+
+        },function(error){
+          observer.next(resp);
+          observer.complete();
+        }
+
+      )
+
+    }
+  );
+
+
+
+}
+
   getLessonsWords(lessonID:string): Observable<Word[]>{
     var url=this.g_url+'lessonword/getLessonsWords';
     var body=JSON.stringify({lessonID:lessonID});
@@ -83,6 +119,7 @@ export class BackendService{
        })
      })
   }
+
   getAllGuessed(studentID:string): Observable<any[]>{
     var url=this.g_url+'studentword/getAllGuessed';
     var body=JSON.stringify({studentID:studentID});
@@ -122,6 +159,5 @@ export class BackendService{
       })
     })
   }
-
 
 }

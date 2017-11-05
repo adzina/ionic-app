@@ -32,14 +32,20 @@ export class ChooseLessonComponent{
                 // this.onlyUniqueLessons();
                 //------------------------------------------------------------------------------
                 this._backendService.getAllMyLessons().subscribe(data=>{
-                  console.log(data);
+                  //console.log(data);
                   this.lessons=data;
+                  //this.from_date=new Date();
+                  //console.log(this.from_date.getDate());
+                //  this.until_date=new Date(this.lessons[0].date.getTime());
+                  //console.log(this.until_date)
                 });
 
     this.mode=null;
   }
   choose(i: number) {
-    var lessonChosen=this.lessons[i];
+    var lessonChosen:Lesson[];
+    lessonChosen=[];
+    lessonChosen.push(this.lessons[i]);
     this._userService.chooseLesson(lessonChosen);
     this._navCtrl.push(ChooseRevisionLearningComponent);
   }
@@ -63,14 +69,41 @@ export class ChooseLessonComponent{
             date => {this.until_date=date;
                     if(this.until_date>this.from_date)
                       {
-                        this._userService.chooseLesson(this.lessons[0]);
+                        var lessons:Lesson[];
+                        this.presentToast3("len:"+this.lessons.length);
+                        for(var i=0;i<this.lessons.length;i++){
+                          this.presentToast3("first: "+this.lessons[i].date.getDate() + "\n second:"+ this.until_date.getDate());
+                          if(this.lessons[i].date.getDate()<=this.until_date.getDate()
+                              &&
+                              this.lessons[i].date.getDate()>=this.from_date.getDate()){
+                            lessons.push(this.lessons[i]);
+                            this.presentToast2(i);
+                          }
+                        }
+                        console.log(lessons);
+                        this._userService.chooseLesson(lessons);
                         this._navCtrl.push(DashboardComponent);}
                     else
                       this.presentToast();
                     }
             );
           }
-
+  presentToast3(msg:string){
+            let toast = this._toast.create({
+                      message: msg,
+                      duration: 5000,
+                      position: 'middle'
+                    });
+                toast.present();
+          }
+presentToast2(i:number){
+  let toast = this._toast.create({
+            message: this.lessons[i].subject,
+            duration: 5000,
+            position: 'middle'
+          });
+      toast.present();
+}
   presentToast() {
       let toast = this._toast.create({
                 message: 'Wrong dates',

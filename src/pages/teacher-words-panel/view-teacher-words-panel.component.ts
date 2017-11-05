@@ -24,7 +24,7 @@ export class TeacherWordsPanelComponent {
     //-----------------------------------------------------------------------------
     this.lessons = [{ eng: "one", pol: "jeden", id: "1", lesson: "words1" }, { eng: "two", pol: "dwa", id: "2", lesson: "words1" }, { eng: "three", pol: "trzy", id: "3", lesson: "words1" }, { eng: "cat", pol: "kot", id: "4", lesson: "words2" }, { eng: "dog", pol: "pies", id: "5", lesson: "words2" }];
     //------------------------------------------------------------------------------
-    this.chosenLesson=_userService.getLesson();
+    this.chosenLesson=_userService.getLesson()[0];
     //--------------------------------------------------------------------------------
     //pobierz z bazy danych tylko slowka z danej lekcji
     //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);

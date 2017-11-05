@@ -25,7 +25,7 @@ export class DashboardComponent {
   wordsReady: boolean;
   user: string;
   clicked: boolean;
-  chosenLesson: Lesson;
+  chosenLesson: Lesson[];
   mode: number;
   modeWords:number;
   constructor(
@@ -43,8 +43,10 @@ export class DashboardComponent {
     this.mode = this._userService.getMode();
     this.chosenLesson = this._userService.getLesson();
     this.modeWords = this._userService.getModeWords();
-    this._backendService.getLessonsWords(this.chosenLesson.id).subscribe(
+
+    this._backendService.getAllLessonsWords(this.chosenLesson).subscribe(
       data => {
+        console.log(data);
         this.allWords = data;
         this.words = this.allWords.concat();
         if(this.modeWords){

@@ -56,15 +56,23 @@ submit(type:string){
   var email=this.email;
   var pswd=this.password;
   let body = JSON.stringify({ email, pswd });
-  this.http.post('http://localhost:1337/user/login', body, { headers: this.contentHeader })
-      .map(res => res.json())
-      .subscribe(
-        data => {this.authSuccess(data.id_token);
-          this._loginService.setUserID(data.id);
-          this._navCtrl.push(ChooseModeComponent);
-        },
-        err => {this.error = err, this.presentToast()}
-      );
+  var url;
+  this.http.get('assets/config.json')
+  .map(res => res.json())
+  .subscribe((api_data) => {
+    url = api_data.apiUrl+'user/login';
+     this.http.post(url, body, { headers: this.contentHeader })
+          .map(res => res.json())
+          .subscribe(
+            data => {this.authSuccess(data.id_token);
+              this._loginService.setUserID(data.id);
+              this._loginService.setUsername(data.first_name);
+              this._navCtrl.push(ChooseModeComponent);
+            },
+            err => {this.error = err, this.presentToast()}
+          );
+  });
+
 
   };
   authSuccess(token) {

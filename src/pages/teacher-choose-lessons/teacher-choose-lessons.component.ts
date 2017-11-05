@@ -46,7 +46,9 @@ export class TeacherChooseLessonsComponent {
 
   }
   choose(lessonNr: Lesson) {
-    this._userService.chooseLesson(lessonNr);
+    var lesson: Lesson[];
+    lesson.push(lessonNr);
+    this._userService.chooseLesson(lesson);
       let op=this._userService.getOption();
       if(op==1)
         this._navCtrl.push(TeacherWordsPanelComponent);
