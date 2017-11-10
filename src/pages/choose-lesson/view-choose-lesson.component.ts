@@ -21,11 +21,13 @@ export class ChooseLessonComponent{
   until_date: Date;
   lessons: Lesson[];
   lessonsUnique: string[];
+  lessonsDate: date[];
   constructor(private _navCtrl: NavController,
               private _datePicker: DatePicker,
               private _userService: UserService,
               private _backendService: BackendService,
               private _toast: ToastController){
+                this.lessonsDate=[];
                 //-----------------------------------------------------------------------------
                 // this.lessons = [{ eng: "one", pol: "jeden", id: "1", lesson: "words1" }, { eng: "two", pol: "dwa", id: "2", lesson: "words1" }, { eng: "three", pol: "trzy", id: "3", lesson: "words1" }, { eng: "cat", pol: "kot", id: "4", lesson: "words2" }, { eng: "dog", pol: "pies", id: "5", lesson: "words2" }];
                 // this.lessonsUnique=[];
@@ -34,13 +36,32 @@ export class ChooseLessonComponent{
                 this._backendService.getAllMyLessons().subscribe(data=>{
                   //console.log(data);
                   this.lessons=data;
-                  //this.from_date=new Date();
-                  //console.log(this.from_date.getDate());
-                //  this.until_date=new Date(this.lessons[0].date.getTime());
-                  //console.log(this.until_date)
+
+                  this.sortLessons();
+                  this.getDates();
                 });
 
     this.mode=null;
+  }
+  getDates(){
+    var date;
+    for (var i=0;i<this.lessons.length;i++){
+      date=new Date(this.lessons[i].date);
+      this.lessonsDate.push({day: date.getUTCDate(),month: date.getUTCMonth()+1,year: date.getUTCFullYear()});
+    }
+    console.log(this.lessonsDate);
+  }
+  sortLessons(){
+    this.lessons.sort( function(lesson1, lesson2) {
+	    if ( lesson1.date < lesson2.date ){
+	    	return -1;
+	    }else if( lesson1.date > lesson2.date ){
+	        return 1;
+	    }else{
+	    	return 0;
+	    }
+	});
+
   }
   choose(i: number) {
     var lessonChosen:Lesson[];
@@ -67,43 +88,39 @@ export class ChooseLessonComponent{
             androidTheme: this._datePicker.ANDROID_THEMES.THEME_HOLO_DARK
           }).then(
             date => {this.until_date=date;
+                    var final_lessons:Lesson[];
+                    final_lessons=[];
                     if(this.until_date>this.from_date)
                       {
-                        var lessons:Lesson[];
-                        this.presentToast3("len:"+this.lessons.length);
+                        var tmp_date: Date;
                         for(var i=0;i<this.lessons.length;i++){
-                          this.presentToast3("first: "+this.lessons[i].date.getDate() + "\n second:"+ this.until_date.getDate());
-                          if(this.lessons[i].date.getDate()<=this.until_date.getDate()
+                          tmp_date=new Date(this.lessons[i].date);
+                          if(tmp_date<=this.until_date
                               &&
-                              this.lessons[i].date.getDate()>=this.from_date.getDate()){
-                            lessons.push(this.lessons[i]);
-                            this.presentToast2(i);
+                              tmp_date>=this.from_date){
+
+                            final_lessons.push(this.lessons[i]);
                           }
                         }
-                        console.log(lessons);
-                        this._userService.chooseLesson(lessons);
-                        this._navCtrl.push(DashboardComponent);}
+                        this.presentToast2(final_lessons[0].subject);
+                        this.presentToast2(final_lessons[1].subject);
+                        this.presentToast2(final_lessons[2].subject);
+                        this._userService.chooseLesson(final_lessons);
+                        this._navCtrl.push(DashboardComponent);
+                      }
                     else
                       this.presentToast();
                     }
             );
           }
-  presentToast3(msg:string){
-            let toast = this._toast.create({
-                      message: msg,
-                      duration: 5000,
-                      position: 'middle'
-                    });
-                toast.present();
-          }
-presentToast2(i:number){
-  let toast = this._toast.create({
-            message: this.lessons[i].subject,
-            duration: 5000,
-            position: 'middle'
-          });
-      toast.present();
-}
+          presentToast2(x:string) {
+              let toast = this._toast.create({
+                        message: x,
+                        duration: 500,
+                        position: 'middle'
+                      });
+                  toast.present();
+                }
   presentToast() {
       let toast = this._toast.create({
                 message: 'Wrong dates',
@@ -121,4 +138,9 @@ interface word {
   pol: string;
   lesson: string;
   id: string;
+}
+interface date {
+  day: number;
+  month: number;
+  year: number;
 }

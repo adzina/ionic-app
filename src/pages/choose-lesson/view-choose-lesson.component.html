@@ -31,8 +31,8 @@
   	 </div>
   	 <div *ngIf="mode==1" style="text-align: center;">
   		 <ion-list>
-  			 <button ion-item *ngFor="let lesson of lessons; let i=index" (click)="choose(i)">
-  				 {{lesson.subject}}
+  			 <button ion-item *ngFor="let date of lessonsDate;  let i=index" (click)="choose(i)">
+  				 {{date.day}}.{{date.month}}.{{date.year}}: {{lessons[i].subject}}
   			 </button>
   		 </ion-list>
   	</div>
