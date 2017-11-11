@@ -22,6 +22,7 @@ export class ChooseLessonComponent{
   lessons: Lesson[];
   lessonsUnique: string[];
   lessonsDate: date[];
+  checked: boolean[];
   constructor(private _navCtrl: NavController,
               private _datePicker: DatePicker,
               private _userService: UserService,
@@ -29,10 +30,17 @@ export class ChooseLessonComponent{
               private _toast: ToastController){
                 this.lessonsDate=[];
                 this.lessons=this._userService.getAllLessons();
+                this.clearChecked();
                 this.getDates();
 
 
     this.mode=null;
+  }
+  clearChecked(){
+    this.checked=[];
+    for(var i=0;i<this.lessons.length;i++){
+      this.checked.push(false);
+    }
   }
   getDates(){
     var date;
@@ -43,12 +51,18 @@ export class ChooseLessonComponent{
     console.log(this.lessonsDate);
   }
 
-  choose(i: number) {
+  submit(){
     var lessonChosen:Lesson[];
     lessonChosen=[];
-    lessonChosen.push(this.lessons[i]);
+    for(var i=0;i<this.checked.length;i++){
+      if(this.checked[i]){
+        lessonChosen.push(this.lessons[i]);
+      }
+    }
     this._userService.chooseLesson(lessonChosen);
     this._navCtrl.push(ChooseRevisionLearningComponent);
+
+
   }
   setmode(m:number){
     this.mode=m;
@@ -79,7 +93,7 @@ export class ChooseLessonComponent{
                               &&
                               tmp_date>=this.from_date){
 
-                            final_lessons.push(this.lessons[i]);
+                            final_lessons.push(Object.assign({}, this.lessons[i]));
                           }
                         }
                         this.presentToast2(final_lessons[0].subject);

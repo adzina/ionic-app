@@ -31,9 +31,11 @@
   	 </div>
   	 <div *ngIf="mode==1" style="text-align: center;">
   		 <ion-list>
-  			 <button ion-item *ngFor="let date of lessonsDate;  let i=index" (click)="choose(i)">
-  				 {{date.day}}.{{date.month}}.{{date.year}}: {{lessons[i].subject}}
-  			 </button>
+         <ion-item *ngFor="let date of lessonsDate;  let i=index">
+            <ion-label>{{date.day}}.{{date.month}}.{{date.year}}: {{lessons[i].subject}}</ion-label>
+            <ion-checkbox [(ngModel)]="checked[i]"></ion-checkbox>
+         </ion-item>
   		 </ion-list>
+       <button ion-button color="success" block (click)="submit()">submit</button>
   	</div>
 </ion-content>
