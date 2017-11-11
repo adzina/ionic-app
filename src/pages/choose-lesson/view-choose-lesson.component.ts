@@ -28,18 +28,9 @@ export class ChooseLessonComponent{
               private _backendService: BackendService,
               private _toast: ToastController){
                 this.lessonsDate=[];
-                //-----------------------------------------------------------------------------
-                // this.lessons = [{ eng: "one", pol: "jeden", id: "1", lesson: "words1" }, { eng: "two", pol: "dwa", id: "2", lesson: "words1" }, { eng: "three", pol: "trzy", id: "3", lesson: "words1" }, { eng: "cat", pol: "kot", id: "4", lesson: "words2" }, { eng: "dog", pol: "pies", id: "5", lesson: "words2" }];
-                // this.lessonsUnique=[];
-                // this.onlyUniqueLessons();
-                //------------------------------------------------------------------------------
-                this._backendService.getAllMyLessons().subscribe(data=>{
-                  //console.log(data);
-                  this.lessons=data;
+                this.lessons=this._userService.getAllLessons();
+                this.getDates();
 
-                  this.sortLessons();
-                  this.getDates();
-                });
 
     this.mode=null;
   }
@@ -51,18 +42,7 @@ export class ChooseLessonComponent{
     }
     console.log(this.lessonsDate);
   }
-  sortLessons(){
-    this.lessons.sort( function(lesson1, lesson2) {
-	    if ( lesson1.date < lesson2.date ){
-	    	return -1;
-	    }else if( lesson1.date > lesson2.date ){
-	        return 1;
-	    }else{
-	    	return 0;
-	    }
-	});
 
-  }
   choose(i: number) {
     var lessonChosen:Lesson[];
     lessonChosen=[];

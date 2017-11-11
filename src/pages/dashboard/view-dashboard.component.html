@@ -17,14 +17,14 @@
 
 			 <br><br>
 
-			 <div class="grid2x2" *ngIf="!mode && wordsReady">
+			 <div class="grid2x2" *ngIf="!modeOfResponse && wordsReady">
 									<!-- iteruje po wszystkich opcjach z tablicy i tworzy kolejne przyciski wg wzoru-->
 									<div *ngFor=" let word of options">
 											<button ion-button round type="submit" class={{ok}} (click)="assign(word.polish)">{{word.polish}}</button>
 									</div>
 			</div>
 
-			<div *ngIf="mode" style="width: 50%; margin: 0 auto; text-align: center">
+			<div *ngIf="modeOfResponse" style="width: 50%; margin: 0 auto; text-align: center">
 
 								<input type="text" name="response" [(ngModel)]="response" class={{ok}} (keyup.enter)="assign(response)" placeholder="Your response">
 

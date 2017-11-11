@@ -14,6 +14,7 @@ import { LoginComponent } from '../pages/login/view-login.component';
 import { RegisterComponent} from '../pages/register/view-register.component';
 import {ChooseModeComponent} from '../pages/choose-mode/view-choose-mode.component';
 import {ChooseLessonComponent} from '../pages/choose-lesson/view-choose-lesson.component';
+import {MenuLessonComponent} from '../pages/menu-lesson/view-menu-lesson.component';
 import {ChooseRevisionLearningComponent} from '../pages/choose-revision-learning/view-choose-revision-learning.component';
 import {DashboardComponent} from '../pages/dashboard/view-dashboard.component';
 import {TeacherDashboardComponent} from '../pages/teacher-dashboard/view-teacher-dashboard.component';
@@ -47,6 +48,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegisterComponent,
     ChooseModeComponent,
     ChooseLessonComponent,
+    MenuLessonComponent,
     ProgressComponent,
     ChooseRevisionLearningComponent,
     DashboardComponent,
@@ -71,6 +73,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegisterComponent,
     ChooseModeComponent,
     ChooseLessonComponent,
+    MenuLessonComponent,
     ProgressComponent,
     ChooseRevisionLearningComponent,
     DashboardComponent,

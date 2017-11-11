@@ -26,8 +26,8 @@ export class DashboardComponent {
   user: string;
   clicked: boolean;
   chosenLesson: Lesson[];
-  mode: number;
-  modeWords:number;
+  modeOfWords: number;
+  modeOfResponse:number;
   constructor(
     private _backendService: BackendService,
     private _loginService: LoginService,
@@ -40,16 +40,16 @@ export class DashboardComponent {
     this.clicked = false;
     this.allWords=[];
     this.words=[];
-    this.mode = this._userService.getMode();
+    this.modeOfWords = this._userService.getModeWords();
     this.chosenLesson = this._userService.getLesson();
-    this.modeWords = this._userService.getModeWords();
+    this.modeOfResponse = this._userService.getModeOfResponse();
 
     this._backendService.getAllLessonsWords(this.chosenLesson).subscribe(
       data => {
         console.log(data);
         this.allWords = data;
         this.words = this.allWords.concat();
-        if(this.modeWords){
+        if(this.modeOfWords){
             this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
               if (guessed != null) {
                 for (var i = 0; i < guessed.length; i++) {
@@ -126,10 +126,6 @@ export class DashboardComponent {
         this.options[i] = this.allWords[i];
       }
     }
-    console.log(this.words);
-    console.log("rand"+rand);
-    console.log("how_far"+how_far);
-    console.log(this.options);
     this.wordsReady = true;
   }
   assign(x: string) {
@@ -150,7 +146,7 @@ export class DashboardComponent {
     if (this.clicked) {
       this._backendService.addOrUpdateStudentWord(this.ok, userID, this.wordToGuess.id).subscribe(data => {
         this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
-          if (guessed != null && this.modeWords) {
+          if (guessed != null && this.modeOfWords) {
             for (var i = 0; i < guessed.length; i++) {
               for (var j = 0; j < this.words.length; j++) {
                 if (this.words[j].id == guessed[i].wordID) {

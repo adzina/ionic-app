@@ -19,7 +19,7 @@ export class ChooseModeComponent{
   }
   setmode(m:number){
     if(m!=2){
-    this._userService.setMode(m);
+    this._userService.setModeOfResponse(m);
     this._navCtrl.push(ChooseLessonComponent);
 }
 else{

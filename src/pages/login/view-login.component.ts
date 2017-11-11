@@ -4,9 +4,7 @@ import { ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import {LoginService} from '../../services/login.service';
 import { BackendService } from '../../services/backend.service';
-import {ChooseModeComponent} from '../choose-mode/view-choose-mode.component';
-import { RegisterComponent} from '../register/view-register.component';
-import {TeacherDashboardComponent} from '../teacher-dashboard/view-teacher-dashboard.component';
+import {MenuLessonComponent} from '../menu-lesson/view-menu-lesson.component';
 import {Headers, Http} from "@angular/http";
 import {AuthService} from "../../services/auth/auth";
 import {JwtHelper} from "angular2-jwt";
@@ -75,7 +73,7 @@ submit(type:string){
             data => {this.authSuccess(data.id_token);
               this._loginService.setUserID(data.id);
               this._loginService.setUsername(data.first_name);
-              this._navCtrl.push(ChooseModeComponent);
+              this._navCtrl.push(MenuLessonComponent);
             },
             err => {this.error = err, this.presentToast()}
           );
@@ -97,9 +95,6 @@ submit(type:string){
         position: 'middle'
       });
   toast.present();
-}
-register(){
-  this._navCtrl.push(RegisterComponent);
 }
 }
 interface ItemsResponse {
