@@ -25247,8 +25247,9 @@ ion-navbar.toolbar {
 }
 
 div.word_to_guess {
+  margin-top: 10px;
   text-align: center;
-  font-size: 1000%;
+  font-size: 900%;
   font-weight: bold;
   font-style: oblique;
   border-style: solid;
@@ -25362,25 +25363,4 @@ h2.yellow {
 
 h2.green {
   background-color: lightgreen;
-}
-
-ion-buttons button[icon-only].my-style-for-modal {
-  margin: 0 6px;
-  min-width: 36px;
-}
-
-ion-buttons button[icon-only].my-style-for-modal {
-  margin: 0 6px;
-  min-width: 36px;
-}
-
-.center {
-  height: 100%;
-  padding: 40% 0;
-  text-align: center;
-}
-
-ion-buttons button[icon-only].my-style-for-modal {
-  margin: 0 6px;
-  min-width: 36px;
 }

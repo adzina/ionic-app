@@ -17,6 +17,7 @@ export class GoodbyeComponent{
     this._loginService.setLoggedIn(false);
     this._loginService.setUserType(null);
     this._loginService.setUsername(null);
+    localStorage.removeItem('token');
   }
   login(){
     this._navCtrl.push(LoginComponent);

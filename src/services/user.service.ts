@@ -34,14 +34,18 @@ export class UserService {
   }
   chooseLesson(lesson: Lesson[]) {
     this.lessonChosen=[];
+    console.log("wybrane lekcje:");
     for(var i=0;i<lesson.length;i++){
         this.lessonChosen.push(Object.assign({}, lesson[i]));
+        console.log(lesson[i].subject);
     }
   }
   chooseLessonByNr(nrs: number[]){
     this.lessonChosen=[];
+    console.log("wybrane lekcje:");
     for(var i=0;i<nrs.length;i++){
       this.lessonChosen.push(Object.assign({},this.allLessons[nrs[i]]));
+      console.log(this.allLessons[nrs[i]].subject);
     }
   }
   chooseAllLessons(){

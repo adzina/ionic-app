@@ -57,13 +57,14 @@ submit(type:string){
   var email=this.email;
   var pswd=this.password;
   let body = JSON.stringify({ email, pswd });
-
+  /*
   if(this.url){
         var x='http://'+this.url+':1337/';
             this._backendService.setApiUrl(x);
     }
-    this.url=this._backendService.getApiUrl()+'user/login';
-
+    */
+  //this.url="http://10.0.2.2:1337/user/login";
+  this.url="http://localhost:1337/user/login";
   this.http.get('assets/config.json')
   .map(res => res.json())
   .subscribe((api_data) => {
@@ -75,7 +76,7 @@ submit(type:string){
               this._loginService.setUsername(data.first_name);
               this._navCtrl.push(MenuLessonComponent);
             },
-            err => {this.error = err, this.presentToast()}
+            err => {this.error = err, this.presentToast(err)}
           );
   });
 
@@ -88,9 +89,9 @@ submit(type:string){
   //  console.log(this.user);
   // this.storage.set('profile', this.user);
  }
-  presentToast() {
+  presentToast(msg:string) {
     let toast = this._toast.create({
-        message: 'Wrong credentials',
+        message: msg,
         duration: 5000,
         position: 'middle'
       });

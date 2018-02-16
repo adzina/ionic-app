@@ -22,12 +22,14 @@ export class DashboardComponent {
   wordToGuess: Word;
   response: string;
   ok: boolean;
-  wordsReady: boolean;
   user: string;
   clicked: boolean;
   chosenLesson: Lesson[];
   modeOfWords: number;
   modeOfResponse:number;
+  eng2pol: boolean;
+  dataReady:boolean;
+  userID: string;
   constructor(
     private _backendService: BackendService,
     private _loginService: LoginService,
@@ -36,14 +38,15 @@ export class DashboardComponent {
     public _navCtrl: NavController) {
     this.response = null;
     this.ok = null;
-    this.wordsReady = false;
     this.clicked = false;
     this.allWords=[];
     this.words=[];
     this.modeOfWords = this._userService.getModeWords();
     this.chosenLesson = this._userService.getLesson();
     this.modeOfResponse = this._userService.getModeOfResponse();
-
+    this.userID = this._loginService.getUserID();
+    this.eng2pol=true;
+    this.dataReady=false;
     this._backendService.getAllLessonsWords(this.chosenLesson).subscribe(
       data => {
         console.log(data);
@@ -126,13 +129,18 @@ export class DashboardComponent {
         this.options[i] = this.allWords[i];
       }
     }
-    this.wordsReady = true;
+    console.log(this.wordToGuess);
+    this.dataReady=true;
   }
   assign(x: string) {
     if (!this.clicked) {
       this.clicked = true;
       this.response = x;
-      this.ok = this.response == this.wordToGuess.polish ? true : false;
+      if(this.eng2pol)
+        this.ok = this.response.toLowerCase() == this.wordToGuess.polish.toLowerCase() ? true : false;
+      else
+        this.ok = this.response.toLowerCase() == this.wordToGuess.english.toLowerCase() ? true : false;
+
     }
   }
   swipeEvent(e) {
@@ -141,10 +149,8 @@ export class DashboardComponent {
     }
   }
   nextword() {
-    var userID = this._loginService.getUserID();
-
     if (this.clicked) {
-      this._backendService.addOrUpdateStudentWord(this.ok, userID, this.wordToGuess.id).subscribe(data => {
+      this._backendService.addOrUpdateStudentWord(this.ok, this.userID, this.wordToGuess.id).subscribe(data => {
         this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
           if (guessed != null && this.modeOfWords) {
             for (var i = 0; i < guessed.length; i++) {
@@ -156,9 +162,10 @@ export class DashboardComponent {
             }
           }
           this.clicked = false;
-          this.prepareOptions();
           this.response = null;
           this.ok = null;
+          this.eng2pol=!this.eng2pol;
+          this.prepareOptions();
         })
       })
     }

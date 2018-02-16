@@ -9,18 +9,12 @@ import { HttpModule, Http, RequestOptions,ConnectionBackend } from '@angular/htt
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { HttpClient } from '@angular/common/http';
 
-import {TeacherChooseLessonsComponent} from '../pages/teacher-choose-lessons/teacher-choose-lessons.component';
 import { LoginComponent } from '../pages/login/view-login.component';
-import { RegisterComponent} from '../pages/register/view-register.component';
 import {ChooseModeComponent} from '../pages/choose-mode/view-choose-mode.component';
 import {ChooseLessonComponent} from '../pages/choose-lesson/view-choose-lesson.component';
 import {MenuLessonComponent} from '../pages/menu-lesson/view-menu-lesson.component';
 import {ChooseRevisionLearningComponent} from '../pages/choose-revision-learning/view-choose-revision-learning.component';
 import {DashboardComponent} from '../pages/dashboard/view-dashboard.component';
-import {TeacherDashboardComponent} from '../pages/teacher-dashboard/view-teacher-dashboard.component';
-import {TeacherAddStudentsComponent} from '../pages/teacher-add-students/view-teacher-add-students.component';
-import {TeacherCreateLessonComponent} from '../pages/teacher-create-lesson/view-teacher-create-lesson.component';
-import {TeacherWordsPanelComponent} from '../pages/teacher-words-panel/view-teacher-words-panel.component';
 import {ProgressComponent} from '../pages/progress/view-progress.component';
 import {GoodbyeComponent} from '../pages/goodbye/view-goodbye.component';
 
@@ -43,19 +37,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 @NgModule({
   declarations: [
     LanguageApp,
-    TeacherChooseLessonsComponent,
     LoginComponent,
-    RegisterComponent,
     ChooseModeComponent,
     ChooseLessonComponent,
     MenuLessonComponent,
     ProgressComponent,
     ChooseRevisionLearningComponent,
     DashboardComponent,
-    TeacherDashboardComponent,
-    TeacherAddStudentsComponent,
-    TeacherCreateLessonComponent,
-    TeacherWordsPanelComponent,
     GoodbyeComponent,
   ],
   imports: [
@@ -68,19 +56,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   bootstrap: [IonicApp],
   entryComponents: [
     LanguageApp,
-    TeacherChooseLessonsComponent,
     LoginComponent,
-    RegisterComponent,
     ChooseModeComponent,
     ChooseLessonComponent,
     MenuLessonComponent,
     ProgressComponent,
     ChooseRevisionLearningComponent,
     DashboardComponent,
-    TeacherDashboardComponent,
-    TeacherCreateLessonComponent,
-    TeacherAddStudentsComponent,
-    TeacherWordsPanelComponent,
     GoodbyeComponent
   ],
   providers: [{

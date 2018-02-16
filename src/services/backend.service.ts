@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BackendService{
 
+//g_url="http://10.0.2.2:1337/";
 g_url="http://localhost:1337/";
   auth: AuthService;
   allWords=[];
@@ -61,6 +62,7 @@ setApiUrl(url:string){
                    (group:Group,resp:Response)=>resp.json()
                  )
           .subscribe(result => {
+                console.log(result);
                 observer.next(result);
                 observer.complete();
             });
