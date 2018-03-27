@@ -57,14 +57,10 @@ submit(type:string){
   var email=this.email;
   var pswd=this.password;
   let body = JSON.stringify({ email, pswd });
-  /*
-  if(this.url){
-        var x='http://'+this.url+':1337/';
-            this._backendService.setApiUrl(x);
-    }
-    */
+
   //this.url="http://10.0.2.2:1337/user/login";
-  this.url="http://localhost:1337/user/login";
+  //this.url="http://localhost:1337/user/login";
+  this.url='http://54976-1-fba7f6-01.services.oktawave.com:1337/user/login';
   this.http.get('assets/config.json')
   .map(res => res.json())
   .subscribe((api_data) => {
@@ -85,9 +81,6 @@ submit(type:string){
   authSuccess(token) {
    this.error = null;
    this.storage.set('token', token);
-  //  this.user = this.jwtHelper.decodeToken(token).user_name;
-  //  console.log(this.user);
-  // this.storage.set('profile', this.user);
  }
   presentToast(msg:string) {
     let toast = this._toast.create({

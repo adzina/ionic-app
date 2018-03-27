@@ -42,6 +42,8 @@ export class UserService {
   }
   chooseLessonByNr(nrs: number[]){
     this.lessonChosen=[];
+    console.log("Wszystkie lekcje:");
+    console.log(this.allLessons)
     console.log("wybrane lekcje:");
     for(var i=0;i<nrs.length;i++){
       this.lessonChosen.push(Object.assign({},this.allLessons[nrs[i]]));

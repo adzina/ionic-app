@@ -15,7 +15,8 @@ import 'rxjs/add/operator/map';
 export class BackendService{
 
 //g_url="http://10.0.2.2:1337/";
-g_url="http://localhost:1337/";
+//g_url="http://localhost:1337/";
+g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
   auth: AuthService;
   allWords=[];
   constructor(private _loginService:LoginService,
@@ -55,17 +56,17 @@ setApiUrl(url:string){
 
          let options = new RequestOptions({ headers: headers });
 
-         this.http.post(url, body, options)
-          .flatMap((res:Response)=>res.json())
-          .flatMap((group:Group)=>
-                   this.http.post(url2,JSON.stringify({groupID:group.id}),options),
-                   (group:Group,resp:Response)=>resp.json()
-                 )
-          .subscribe(result => {
-                console.log(result);
-                observer.next(result);
-                observer.complete();
-            });
+          this.http.post(url, body, options)
+        	.flatMap((res:Response)=>res.json())
+        	.flatMap((group:Group)=>
+          		this.http.post(url2,JSON.stringify({groupID:group.id}),options)
+          			.map((res:Response)=>res.json())
+          	)
+        	.subscribe(result => {
+        		console.log(result);
+        		observer.next(result);
+        		observer.complete();
+        	});
 
 
        })
