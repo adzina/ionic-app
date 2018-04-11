@@ -45,7 +45,7 @@ setApiUrl(url:string){
     var id=this._loginService.getUserID();
     var body=JSON.stringify({userID: id});
 
-    var url2=this.g_url+'groupLesson/getGroupsLessons';
+    var url2=this.g_url+'group/getGroupsLessons';
     return Observable.create((observer: Observer<any>) => {
 
        this.storage.get('token').then(token => {
