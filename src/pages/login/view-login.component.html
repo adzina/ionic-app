@@ -1,6 +1,6 @@
 <ion-header>
 <ion-navbar>
-    <img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+    <img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" class="pull-left"/>
     <ion-title class="titleicon" style="display:inline-block">Login</ion-title>
 </ion-navbar>
 </ion-header>
@@ -23,26 +23,11 @@
         <ion-label style="color:black" stacked>Password</ion-label>
         <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
       </ion-item>
-      <!--
-      <ion-item class="item">
-        <ion-label style="color:black" stacked>Domyślne url: <b>http://localhost:1337/</b><br>
-        Żeby zmienić na np <b>http://192.178.1.17:1337/</b> wpisz <b>192.178.1.17</b> poniżej</ion-label>
-    		  <ion-input type="text" name="url" [(ngModel)]="url" placeholder="Wpisz url"></ion-input>
-      </ion-item>
-    -->
+
     </ion-list>
 
     <div padding>
       <button ion-button color="primary" block (click)="submit('student')">Sign in</button>
-      <!--<button ion-button color="primary" block (click)="submit('teacher')">Sign in as teacher</button>-->
-    </div>
-<!--
-    <br>
-    <br>
+  </div>
 
-    <h2 align="center">Do not have an account yet?</h2>
-    <div padding>
-  	<button ion-button style="background-color:#00b386" block (click)="register()">Register</button>
-    </div>
--->
 </ion-content>
