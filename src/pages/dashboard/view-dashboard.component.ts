@@ -86,15 +86,27 @@ export class DashboardComponent {
        });
    toast.present();
  }
+ findWordInAllWords(){
+   for(var i=0;i<this.allWords.length;i++){
+     if(this.allWords[i].id ==this.wordToGuess.id){
+       return i
+     }
+   }
+ }
   prepareOptions() {
     this.options = [];
     var length = this.allWords.length;
     //rand to index wylosowanego slowa do odgadnięcia
     var rand = Math.floor(Math.random() * this.words.length);
-
     //how_far mówi o ile wyrazów w lewo lub w prawo od wybranego slowa się przesuniemy
     var how_far = Math.floor(Math.random() * 4);
+    if(this.words.length==0){
+      this.presentToast();
+      this.wordToGuess={id:"0",polish:"", english:""}
+      return 0;
+    }
     this.wordToGuess = this.words[rand];
+    rand = this.findWordInAllWords()
     var j = 0;
     var i;
     if (rand + how_far < length && rand - (3-how_far)>=0) {console.log("pierwszy");
@@ -129,7 +141,9 @@ export class DashboardComponent {
         this.options[i] = this.allWords[i];
       }
     }
-    console.log(this.wordToGuess);
+
+    console.log(how_far)
+    console.log(rand)
     this.dataReady=true;
   }
   assign(x: string) {
