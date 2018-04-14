@@ -96,9 +96,6 @@ export class ChooseLessonComponent{
                             final_lessons.push(Object.assign({}, this.lessons[i]));
                           }
                         }
-                        this.presentToast2(final_lessons[0].subject);
-                        this.presentToast2(final_lessons[1].subject);
-                        this.presentToast2(final_lessons[2].subject);
                         this._userService.chooseLesson(final_lessons);
                         this._navCtrl.push(DashboardComponent);
                       }
