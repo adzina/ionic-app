@@ -96,8 +96,13 @@ export class ChooseLessonComponent{
                             final_lessons.push(Object.assign({}, this.lessons[i]));
                           }
                         }
-                        this._userService.chooseLesson(final_lessons);
-                        this._navCtrl.push(DashboardComponent);
+                        if(final_lessons.length==0){
+                          this.presentToast2("No lessons between these dates")
+                        }
+                        else{
+                          this._userService.chooseLesson(final_lessons);
+                          this._navCtrl.push(DashboardComponent);
+                        }
                       }
                     else
                       this.presentToast();
