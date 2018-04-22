@@ -15,8 +15,8 @@ import 'rxjs/add/operator/map';
 export class BackendService{
 
 //g_url="http://10.0.2.2:1337/";
-//g_url="http://localhost:1337/";
-g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
+g_url="http://localhost:1337/";
+// g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
   auth: AuthService;
   allWords=[];
   constructor(private _loginService:LoginService,
@@ -165,6 +165,30 @@ setApiUrl(url:string){
            });
       })
     })
+  }
+  getMyProgress(lessonID):Observable<any>{
+    var studentID = this._loginService.getUserID()
+    var url = this.g_url+'studentword/getMyProgress';
+    var body=JSON.stringify({lessonID:lessonID, studentID:studentID});
+
+    return Observable.create((observer: Observer<any>) => {
+
+       this.storage.get('token').then(token => {
+
+        let headers = new Headers();
+        headers.append('authorization', 'Bearer ' + token);
+
+        let options = new RequestOptions({ headers: headers });
+
+         this.http.post(url, body, options)
+          .map((res:Response)=>res.json())
+          .subscribe(result => {
+                observer.next(result);
+                observer.complete();
+            });
+       })
+     })
+
   }
 
 }

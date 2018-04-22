@@ -14,9 +14,9 @@
 <ion-content class="no-scroll">
 	<div style="text-align: center;">
 		<ion-list>
-			<div *ngFor="let lessonName of lessonsUnique;let i=index" [attr.data-index]="i">
+			<div *ngFor="let lesson of lessons;let i=index" [attr.data-index]="i">
 				<button ion-item (click)="toggle(i)">
-					{{lessonName}}
+					{{lesson.subject}}
 				</button>
 				<div class="div1">
 					<h2 class={{status}} *ngIf="bool[i]">
