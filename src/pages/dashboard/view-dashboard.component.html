@@ -35,5 +35,11 @@
 									<p align="center" *ngIf="!eng2pol">Correct response: {{wordToGuess.english}}</p>
 									<button ion-button block (click)="nextword()"> NEXT >> </button>
 			</div>
+			<div *ngIf="wordToGuess.comment!=null && wordToGuess.comment!='' && !showHint">
+				<button ion-button block (click)="toggleHint()"> Show hint </button>
+			</div>
+			<div *ngIf="showHint && !clicked">
+				<h3 align="center"><b>{{wordToGuess.comment}}</b></h3>
+			</div>
 		</div>
 </ion-content>

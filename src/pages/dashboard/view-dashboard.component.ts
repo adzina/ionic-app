@@ -29,6 +29,7 @@ export class DashboardComponent {
   modeOfResponse:number;
   eng2pol: boolean;
   dataReady:boolean;
+  showHint:boolean;
   userID: string;
   constructor(
     private _backendService: BackendService,
@@ -45,8 +46,9 @@ export class DashboardComponent {
     this.chosenLesson = this._userService.getLesson();
     this.modeOfResponse = this._userService.getModeOfResponse();
     this.userID = this._loginService.getUserID();
-    this.eng2pol=true;
-    this.dataReady=false;
+    this.eng2pol = true;
+    this.dataReady = false;
+    this.showHint = false;
     this._backendService.getAllLessonsWords(this.chosenLesson).subscribe(
       data => {
         console.log(data);
@@ -75,7 +77,6 @@ export class DashboardComponent {
         }
       }
     )
-    //this.lessonsFiltered=this.lessons.filter((l:word) => l.lesson===this.chosenLesson);
   }
 
    presentToast() {
@@ -102,7 +103,7 @@ export class DashboardComponent {
     var how_far = Math.floor(Math.random() * 4);
     if(this.words.length==0){
       this.presentToast();
-      this.wordToGuess={id:"0",polish:"", english:""}
+      this.wordToGuess={id:"0",polish:"", english:"", comment:""}
       return 0;
     }
     this.wordToGuess = this.words[rand];
@@ -147,6 +148,7 @@ export class DashboardComponent {
     this.dataReady=true;
   }
   assign(x: string) {
+    this.showHint = true;
     if (!this.clicked) {
       this.clicked = true;
       this.response = x;
@@ -177,12 +179,16 @@ export class DashboardComponent {
           }
           this.clicked = false;
           this.response = null;
+          this.showHint = false;
           this.ok = null;
           this.eng2pol=!this.eng2pol;
           this.prepareOptions();
         })
       })
     }
+  }
+  toggleHint(){
+    this.showHint = !this.showHint;
   }
   logout() {
     this._navCtrl.push(GoodbyeComponent);
