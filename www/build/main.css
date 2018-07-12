@@ -25343,6 +25343,15 @@ input.false {
   background-color: tomato;
 }
 
+div {
+  text-align: center;
+}
+
+.audio-button {
+  width: 100px;
+  height: 100px;
+}
+
 page-hello-ionic {
   background: #ce2020;
 }

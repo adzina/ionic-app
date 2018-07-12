@@ -101,50 +101,61 @@ export class DashboardComponent {
     var rand = Math.floor(Math.random() * this.words.length);
     //how_far mówi o ile wyrazów w lewo lub w prawo od wybranego slowa się przesuniemy
     var how_far = Math.floor(Math.random() * 4);
+    var j = 0;
+    var i;
+    for(i=0;i<4;i++){
+      this.options[i] = {id:"0",polish:"", english:"", url:"",comment:""};
+    }
     if(this.words.length==0){
       this.presentToast();
-      this.wordToGuess={id:"0",polish:"", english:"", comment:""}
+      this.wordToGuess={id:"0",polish:"", english:"", url:"",comment:""}
       return 0;
     }
     this.wordToGuess = this.words[rand];
     rand = this.findWordInAllWords()
-    var j = 0;
-    var i;
+
     if (rand + how_far < length && rand - (3-how_far)>=0) {console.log("pierwszy");
       for (i = rand-(3-how_far); i <= rand + how_far; i++) {
-        this.options[j] = this.allWords[i];
+        if(this.allWords[i]!=undefined)
+          this.options[j] = this.allWords[i];
         j++;
       }
     }
     else if (rand + how_far < length && rand- (3-how_far)<0) {console.log("drugi");
       for (i = length + rand - (3 - how_far); i < length; i++) {
-        this.options[j] = this.allWords[i];
+        if(this.allWords[i]!=undefined)
+          this.options[j] = this.allWords[i];
         j++;
       }
       for (i = 0; i <= rand + how_far; i++) {
-        this.options[j] = this.allWords[i];
+        if(this.allWords[i]!=undefined)
+          this.options[j] = this.allWords[i];
         j++;
       }
     }
     else if(rand + how_far >= length && rand - (3 - how_far) >=0 ) {console.log("trzeci");
       for (i = rand - (3 - how_far); i < length; i++) {
-        this.options[j] = this.allWords[i];
+        if(this.allWords[i]!=undefined)
+          this.options[j] = this.allWords[i];
         j++;
       }
       for (i=0;i<=rand+how_far-length;i++){
-        this.options[j] = this.allWords[i];
+        if(this.allWords[i]!=undefined)
+          this.options[j] = this.allWords[i];
         j++;
       }
 
     }
     else{console.log("czwarty");
       for(i=0;i<length;i++){
-        this.options[i] = this.allWords[i];
+        if(this.allWords[i]!=undefined)
+          this.options[i] = this.allWords[i];
       }
     }
 
     console.log(how_far)
     console.log(rand)
+    console.log(this.options);
     this.dataReady=true;
   }
   assign(x: string) {

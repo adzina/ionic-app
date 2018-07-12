@@ -12,6 +12,12 @@
 	</ion-navbar>
 </ion-header>
 <ion-content class="no-scroll" (swipe)="swipeEvent($event)" *ngIf="dataReady">
+	<div>
+		<audio id="player" src={{wordToGuess.url}}></audio>
+		<button type="button" class="btn btn-default btn-sm audio-button" onclick="document.getElementById('player').play()">
+			<ion-icon name="volume-high"></ion-icon>
+		</button>
+	</div>
 	<div *ngIf="wordToGuess" style="height:100%">
 			 <div class="word_to_guess" *ngIf="eng2pol">{{wordToGuess.english}}</div>
 			 <div class="word_to_guess" *ngIf="!eng2pol">{{wordToGuess.polish}}</div>
@@ -20,14 +26,11 @@
 								<div *ngFor=" let word of options">
 											<button *ngIf="eng2pol" ion-button round type="submit" class={{ok}} (click)="assign(word.polish)">{{word.polish}}</button>
 											<button *ngIf="!eng2pol" ion-button round type="submit" class={{ok}} (click)="assign(word.english)">{{word.english}}</button>
-
-									</div>
+								</div>
 			</div>
 
 			<div *ngIf="modeOfResponse" style="width: 50%; margin: 0 auto; text-align: center">
-
 								<input type="text" name="response" [(ngModel)]="response" class={{ok}} (keyup.enter)="assign(response)" placeholder="Your response">
-
 			</div>
 
 			<div class="response" *ngIf="clicked">
