@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { LoginService } from '../services/login.service';
-import { UserService } from '../services/user.service';
 import { AuthService } from "../services/auth/auth";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Storage } from "@ionic/storage";
@@ -20,7 +19,6 @@ g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
   auth: AuthService;
   allWords=[];
   constructor(private _loginService:LoginService,
-              private _userService: UserService,
               private http:Http,
               private storage:Storage){
                 this.auth = AuthService;

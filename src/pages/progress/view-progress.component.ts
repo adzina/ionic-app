@@ -1,7 +1,5 @@
 import { Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
-import {LoginService} from '../../services/login.service';
-import {UserService} from '../../services/user.service';
 import {BackendService} from '../../services/backend.service';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
 import {Lesson} from '../../models/lesson';
@@ -19,9 +17,7 @@ export class ProgressComponent{
   bool: boolean[];
   lessons: Lesson[];
   lessonsUnique: string[];
-  constructor(private _loginService: LoginService,
-              private _navCtrl:NavController,
-              private _userService: UserService,
+  constructor(private _navCtrl:NavController,
               private _backendService: BackendService) {
                 this._backendService.getAllMyLessons().subscribe(lessons=>{
                     this.lessons = lessons

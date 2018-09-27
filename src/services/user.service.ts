@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { Lesson } from '../models/lesson';
 //import { NavController} from 'ionic-angular';
 

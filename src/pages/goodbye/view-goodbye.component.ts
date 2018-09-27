@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import {LoginService} from '../../services/login.service';
 import {LoginComponent} from '../login/view-login.component';
 
@@ -12,7 +12,7 @@ import {LoginComponent} from '../login/view-login.component';
 export class GoodbyeComponent{
 
   user: string;
-  constructor(private _loginService:LoginService,private _navCtrl: NavController){
+  constructor(private _loginService:LoginService, private _navCtrl: NavController){
     this.user=this._loginService.getUserName();
     this._loginService.setLoggedIn(false);
     this._loginService.setUserType(null);

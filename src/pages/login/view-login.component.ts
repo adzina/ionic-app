@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
 import {LoginService} from '../../services/login.service';
-import { BackendService } from '../../services/backend.service';
 import {MenuLessonComponent} from '../menu-lesson/view-menu-lesson.component';
 import {Headers, Http} from "@angular/http";
 import {AuthService} from "../../services/auth/auth";
@@ -28,7 +26,6 @@ export class LoginComponent{
   url: string;
   constructor(private _loginService: LoginService,
               private _navCtrl: NavController,
-              private _backendService: BackendService,
               private _toast: ToastController,
               private http: Http,
               private storage: Storage){
@@ -90,10 +87,4 @@ submit(type:string){
       });
   toast.present();
 }
-}
-interface ItemsResponse {
-  email: string,
-  password: string,
-  first_name: string,
-  id:string
 }

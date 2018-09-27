@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { DatePicker } from '@ionic-native/date-picker';
-import { ToastController } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { UserService } from '../../services/user.service';
 import { BackendService } from '../../services/backend.service';
 import { ProgressComponent } from '../progress/view-progress.component';
 import { GoodbyeComponent } from '../goodbye/view-goodbye.component';
-import { Group } from '../../models/group';
-import { Lesson } from '../../models/lesson';
 import { ChooseLessonComponent } from '../choose-lesson/view-choose-lesson.component';
 @Component({
   selector: 'menu-lesson',
@@ -19,13 +15,10 @@ export class MenuLessonComponent {
   mode: number;
   constructor(private _navCtrl: NavController,
     private _userService: UserService,
-    private _backendService: BackendService,
-    private _toast: ToastController) {
+    private _backendService: BackendService) {
 
     this._backendService.getAllMyLessons().subscribe(data => {
-
       this._userService.setAllLessons(data);
-
     });
 
     this.mode = null;

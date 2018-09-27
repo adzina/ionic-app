@@ -5,7 +5,7 @@ import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {DatePicker} from '@ionic-native/date-picker';
 import { ToastController } from 'ionic-angular';
 import { LanguageApp } from './app.component';
-import { HttpModule, Http, RequestOptions,ConnectionBackend } from '@angular/http';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { HttpClient } from '@angular/common/http';
 

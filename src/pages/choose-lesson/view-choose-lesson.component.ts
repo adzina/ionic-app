@@ -3,10 +3,8 @@ import {DatePicker} from '@ionic-native/date-picker';
 import { ToastController } from 'ionic-angular';
 import { NavController} from 'ionic-angular';
 import {UserService} from '../../services/user.service';
-import {BackendService} from '../../services/backend.service';
 import {DashboardComponent} from '../dashboard/view-dashboard.component';
 import {GoodbyeComponent} from '../goodbye/view-goodbye.component';
-import { Group } from '../../models/group';
 import { Lesson } from '../../models/lesson';
 import {ChooseRevisionLearningComponent} from '../choose-revision-learning/view-choose-revision-learning.component';
 @Component({
@@ -26,7 +24,6 @@ export class ChooseLessonComponent{
   constructor(private _navCtrl: NavController,
               private _datePicker: DatePicker,
               private _userService: UserService,
-              private _backendService: BackendService,
               private _toast: ToastController){
                 this.lessonsDate=[];
                 this.lessons=this._userService.getAllLessons();
@@ -128,12 +125,6 @@ export class ChooseLessonComponent{
 logout(){
   this._navCtrl.push(GoodbyeComponent);
 }
-}
-interface word {
-  eng: string;
-  pol: string;
-  lesson: string;
-  id: string;
 }
 interface date {
   day: number;
