@@ -8,7 +8,7 @@ import { Group } from '../models/group';
 import { Lesson } from '../models/lesson';
 import { Word } from '../models/word';
 
-import * as async from "async";
+import * as async from 'async';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class BackendService{
@@ -61,7 +61,6 @@ setApiUrl(url:string){
           			.map((res:Response)=>res.json())
           	)
         	.subscribe(result => {
-        		console.log(result);
         		observer.next(result);
         		observer.complete();
         	});

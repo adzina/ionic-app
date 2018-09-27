@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Lesson } from '../models/lesson';
-//import { NavController} from 'ionic-angular';
 
 @Injectable()
 
 export class UserService {
-  private lessonChosen: Lesson[];//zbior lekcji wybranych przez uzytkownika do powtorki
+  private lessonChosen: Lesson[];// set of lessons chosen by the user for revision
   private option: number;
-  private modeOfResponse: number;//0: 1 z 4        1: Type it yourself
-  private modeWords: number;//0: wszystkie slowka z wybranych lekcji    1:tylko nieodgadniete slowka z wybranych lekcji
-  private allLessons: Lesson[];//wszystkie lekcje usera
+  private modeOfResponse: number;// 0: 1 out of 4        1: Type it yourself
+  private modeWords: number;// 0: all words from chosen lessons    1: only non-guessed words fron chosen lessons
+  private allLessons: Lesson[];// all lessons of the user
 
 
   setAllLessons(lessons: Lesson[]) {
@@ -33,20 +32,14 @@ export class UserService {
   }
   chooseLesson(lesson: Lesson[]) {
     this.lessonChosen=[];
-    console.log("wybrane lekcje:");
     for(var i=0;i<lesson.length;i++){
         this.lessonChosen.push(Object.assign({}, lesson[i]));
-        console.log(lesson[i].subject);
     }
   }
   chooseLessonByNr(nrs: number[]){
     this.lessonChosen=[];
-    console.log("Wszystkie lekcje:");
-    console.log(this.allLessons)
-    console.log("wybrane lekcje:");
     for(var i=0;i<nrs.length;i++){
       this.lessonChosen.push(Object.assign({},this.allLessons[nrs[i]]));
-      console.log(this.allLessons[nrs[i]].subject);
     }
   }
   chooseAllLessons(){

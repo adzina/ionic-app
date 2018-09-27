@@ -1,26 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from "@angular/core";
 
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav } from "ionic-angular";
 
-import { LoginComponent } from '../pages/login/view-login.component';
-import {ChooseModeComponent} from '../pages/choose-mode/view-choose-mode.component';
-import {DashboardComponent} from '../pages/dashboard/view-dashboard.component';
-import {ProgressComponent} from '../pages/progress/view-progress.component';
-import {GoodbyeComponent} from '../pages/goodbye/view-goodbye.component';
+import { LoginComponent } from "../pages/login/view-login.component";
+import { ChooseModeComponent } from "../pages/choose-mode/view-choose-mode.component";
+import { DashboardComponent } from "../pages/dashboard/view-dashboard.component";
+import { ProgressComponent } from "../pages/progress/view-progress.component";
+import { GoodbyeComponent } from "../pages/goodbye/view-goodbye.component";
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: "app.html"
 })
 export class LanguageApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav)
+  nav: Nav;
 
   // make HelloIonicPage the root (or first) page
   rootPage = LoginComponent;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string; component: any }>;
 
   constructor(
     public platform: Platform,
@@ -32,12 +32,11 @@ export class LanguageApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Login', component: LoginComponent },
-      { title: 'Choose mode', component: ChooseModeComponent},
-      { title: 'Dashboard', component: DashboardComponent},
-      { title: 'Your progress', component: ProgressComponent},
-      { title: 'Goodbye', component: GoodbyeComponent}
-
+      { title: "Login", component: LoginComponent },
+      { title: "Choose mode", component: ChooseModeComponent },
+      { title: "Dashboard", component: DashboardComponent },
+      { title: "Your progress", component: ProgressComponent },
+      { title: "Goodbye", component: GoodbyeComponent }
     ];
   }
 

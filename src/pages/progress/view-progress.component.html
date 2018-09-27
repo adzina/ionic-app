@@ -1,15 +1,13 @@
 <ion-header>
 	<ion-navbar>
-		<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+		<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" />
 		<ion-title class="titleicon" style="display:inline-block">Your progress</ion-title>
 		<ion-buttons start>
-			 <button ion-button  class="logout" (click)="logout()">
-				 Logout
-			 </button>
-		 </ion-buttons>
-
+			<button ion-button class="logout" (click)="logout()">
+				Logout
+			</button>
+		</ion-buttons>
 	</ion-navbar>
-
 </ion-header>
 <ion-content class="no-scroll">
 	<div style="text-align: center;">
@@ -20,11 +18,11 @@
 				</button>
 				<div class="div1">
 					<h2 class={{status}} *ngIf="bool[i]">
-					  Words learned: {{wordsLearned}}<br>
-					  Words in lesson: {{wordsInLesson}}
+						Words learned: {{wordsLearned}}<br>
+						Words in lesson: {{wordsInLesson}}
 					</h2>
 				</div>
-		</div>
+			</div>
 		</ion-list>
 	</div>
 </ion-content>

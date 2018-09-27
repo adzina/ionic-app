@@ -1,25 +1,19 @@
 <ion-header>
   <ion-navbar>
-
-      <img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
-      <ion-title class="titleicon" style="display:inline-block">menu lesson</ion-title>
-  <ion-buttons start>
-  		 <button ion-button class="logout" (click)="logout()">
-  			 Logout
-  		 </button>
-  	 </ion-buttons>
-
-
+    <img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" />
+    <ion-title class="titleicon" style="display:inline-block">menu lesson</ion-title>
+    <ion-buttons start>
+      <button ion-button class="logout" (click)="logout()">
+        Logout
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <div padding>
-
     <div padding style="margin-bottom:20%">
     </div>
     <button ion-button color="primary" block (click)="setmode(0)">Choose lessons</button>
-
     <button ion-button color="primary" block (click)="setmode(1)">See progress</button>
   </div>
-
 </ion-content>

@@ -1,14 +1,12 @@
 <ion-header>
 	<ion-navbar>
-		<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
+		<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" />
 		<ion-title class="titleicon" style="display:inline-block">Dashboard</ion-title>
 		<ion-buttons start>
-			 <button ion-button class="logout" (click)="logout()">
-				 Logout
-			 </button>
-		 </ion-buttons>
-
-
+			<button ion-button class="logout" (click)="logout()">
+				Logout
+			</button>
+		</ion-buttons>
 	</ion-navbar>
 </ion-header>
 <ion-content class="no-scroll" (swipe)="swipeEvent($event)" *ngIf="dataReady">
@@ -19,30 +17,27 @@
 		</button>
 	</div>
 	<div *ngIf="wordToGuess" style="height:100%">
-			 <div class="word_to_guess" *ngIf="eng2pol">{{wordToGuess.english}}</div>
-			 <div class="word_to_guess" *ngIf="!eng2pol">{{wordToGuess.polish}}</div>
-
-			 <div class="grid2x2" *ngIf="!modeOfResponse">
-								<div *ngFor=" let word of options">
-											<button *ngIf="eng2pol" ion-button round type="submit" class={{ok}} (click)="assign(word.polish)">{{word.polish}}</button>
-											<button *ngIf="!eng2pol" ion-button round type="submit" class={{ok}} (click)="assign(word.english)">{{word.english}}</button>
-								</div>
-			</div>
-
-			<div *ngIf="modeOfResponse" style="width: 50%; margin: 0 auto; text-align: center">
-								<input type="text" name="response" [(ngModel)]="response" class={{ok}} (keyup.enter)="assign(response)" placeholder="Your response">
-			</div>
-
-			<div class="response" *ngIf="clicked">
-									<p align="center" *ngIf="eng2pol">Correct response: {{wordToGuess.polish}}</p>
-									<p align="center" *ngIf="!eng2pol">Correct response: {{wordToGuess.english}}</p>
-									<button ion-button block (click)="nextword()"> NEXT >> </button>
-			</div>
-			<div *ngIf="wordToGuess.comment!=null && wordToGuess.comment!='' && !showHint">
-				<button ion-button block (click)="toggleHint()"> Show hint </button>
-			</div>
-			<div *ngIf="showHint && !clicked">
-				<h3 align="center"><b>{{wordToGuess.comment}}</b></h3>
+		<div class="word_to_guess" *ngIf="eng2pol">{{wordToGuess.english}}</div>
+		<div class="word_to_guess" *ngIf="!eng2pol">{{wordToGuess.polish}}</div>
+		<div class="grid2x2" *ngIf="!modeOfResponse">
+			<div *ngFor=" let word of options">
+				<button *ngIf="eng2pol" ion-button round type="submit" class={{ok}} (click)="assign(word.polish)">{{word.polish}}</button>
+				<button *ngIf="!eng2pol" ion-button round type="submit" class={{ok}} (click)="assign(word.english)">{{word.english}}</button>
 			</div>
 		</div>
+		<div *ngIf="modeOfResponse" style="width: 50%; margin: 0 auto; text-align: center">
+			<input type="text" name="response" [(ngModel)]="response" class={{ok}} (keyup.enter)="assign(response)" placeholder="Your response">
+		</div>
+		<div class="response" *ngIf="clicked">
+			<p align="center" *ngIf="eng2pol">Correct response: {{wordToGuess.polish}}</p>
+			<p align="center" *ngIf="!eng2pol">Correct response: {{wordToGuess.english}}</p>
+			<button ion-button block (click)="nextword()"> NEXT >> </button>
+		</div>
+		<div *ngIf="wordToGuess.comment!=null && wordToGuess.comment!='' && !showHint">
+			<button ion-button block (click)="toggleHint()"> Show hint </button>
+		</div>
+		<div *ngIf="showHint && !clicked">
+			<h3 align="center"><b>{{wordToGuess.comment}}</b></h3>
+		</div>
+	</div>
 </ion-content>

@@ -1,24 +1,21 @@
 <ion-header>
-<ion-navbar>
-	<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block"/>
-	<ion-title class="titleicon" style="display:inline-block">Choose action</ion-title>
-<ion-buttons start>
-		 <button ion-button class="logout" (click)="logout()">
-			 Logout
-		 </button>
-	 </ion-buttons>
-
-
-</ion-navbar>
+	<ion-navbar>
+		<img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" />
+		<ion-title class="titleicon" style="display:inline-block">Choose action</ion-title>
+		<ion-buttons start>
+			<button ion-button class="logout" (click)="logout()">
+				Logout
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 <ion-content class="no-scroll">
-
 	<div padding style="margin-bottom:20%">
 	</div>
 	<div padding>
-	  <button ion-button color="primary" block (click)="setmode(0)">1 from 4</button>
-	  <button ion-button color="primary" block (click)="setmode(1)">Type it yourself</button>
-	  <br>
-	  <button ion-button style="background-color:#00b386" block (click)="setmode(2)">See your progress</button>
+		<button ion-button color="primary" block (click)="setmode(0)">1 from 4</button>
+		<button ion-button color="primary" block (click)="setmode(1)">Type it yourself</button>
+		<br>
+		<button ion-button style="background-color:#00b386" block (click)="setmode(2)">See your progress</button>
 	</div>
 </ion-content>

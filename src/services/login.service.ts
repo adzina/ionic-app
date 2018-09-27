@@ -1,54 +1,49 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable()
-
-export class LoginService{
+export class LoginService {
   loggedIn: boolean;
   userName: string;
   name: string;
   userType: string;
   mode: number;
   userID: string;
-  constructor(){
-
-  }
-  getLoggedIn(){
+  constructor() {}
+  getLoggedIn() {
     return this.loggedIn;
-  };
-  getUserName(){
+  }
+  getUserName() {
     return this.userName;
-  };
-  getName(){
+  }
+  getName() {
     return this.name;
   }
-  getUserType(){
+  getUserType() {
     return this.userType;
-  };
-  getMode(){
+  }
+  getMode() {
     return this.mode;
   }
-  getUserID(){
+  getUserID() {
     return this.userID;
   }
-  setLoggedIn(loggedIn:boolean){
-    this.loggedIn=loggedIn;
-  };
-  setUsername(username:string){
-    this.userName=username;
-
-  };
-  setUserType(userType:string){
-    this.userType=userType;
-
+  setLoggedIn(loggedIn: boolean) {
+    this.loggedIn = loggedIn;
   }
-  setUserID(id:string){
-    this.userID=id;
+  setUsername(username: string) {
+    this.userName = username;
   }
-  setMode(mode:number){
-    this.mode=mode;
+  setUserType(userType: string) {
+    this.userType = userType;
+  }
+  setUserID(id: string) {
+    this.userID = id;
+  }
+  setMode(mode: number) {
+    this.mode = mode;
   }
 
-  checkLogin(){
+  checkLogin() {
     /*
       W zaleznosci od this.type: student/teacher
                             findOne

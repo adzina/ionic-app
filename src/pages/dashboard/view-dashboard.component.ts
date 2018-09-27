@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { BackendService } from '../../services/backend.service';
-import { LoginService } from '../../services/login.service';
-import { UserService } from '../../services/user.service';
-import { GoodbyeComponent } from '../goodbye/view-goodbye.component';
-import { Lesson } from '../../models/lesson';
-import { Word } from '../../models/word';
-import { ToastController } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { NavController } from "ionic-angular";
+import { BackendService } from "../../services/backend.service";
+import { LoginService } from "../../services/login.service";
+import { UserService } from "../../services/user.service";
+import { GoodbyeComponent } from "../goodbye/view-goodbye.component";
+import { Lesson } from "../../models/lesson";
+import { Word } from "../../models/word";
+import { ToastController } from "ionic-angular";
 
 @Component({
-  selector: 'dashboard',
-  templateUrl: 'view-dashboard.component.html'
+  selector: "dashboard",
+  templateUrl: "view-dashboard.component.html"
 })
-
 export class DashboardComponent {
   //tablica zawierajaca tylko slowka pozostale do nauki
   words: Word[];
@@ -26,22 +25,23 @@ export class DashboardComponent {
   clicked: boolean;
   chosenLesson: Lesson[];
   modeOfWords: number;
-  modeOfResponse:number;
+  modeOfResponse: number;
   eng2pol: boolean;
-  dataReady:boolean;
-  showHint:boolean;
+  dataReady: boolean;
+  showHint: boolean;
   userID: string;
   constructor(
     private _backendService: BackendService,
     private _loginService: LoginService,
     private _userService: UserService,
     private _toast: ToastController,
-    public _navCtrl: NavController) {
+    public _navCtrl: NavController
+  ) {
     this.response = null;
     this.ok = null;
     this.clicked = false;
-    this.allWords=[];
-    this.words=[];
+    this.allWords = [];
+    this.words = [];
     this.modeOfWords = this._userService.getModeWords();
     this.chosenLesson = this._userService.getLesson();
     this.modeOfResponse = this._userService.getModeOfResponse();
@@ -49,51 +49,52 @@ export class DashboardComponent {
     this.eng2pol = true;
     this.dataReady = false;
     this.showHint = false;
-    this._backendService.getAllLessonsWords(this.chosenLesson).subscribe(
-      data => {
-        console.log(data);
+    this._backendService
+      .getAllLessonsWords(this.chosenLesson)
+      .subscribe(data => {
         this.allWords = data;
         this.words = this.allWords.concat();
-        if(this.modeOfWords){
-            this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
+        if (this.modeOfWords) {
+          this._backendService
+            .getAllGuessed(this._loginService.getUserID())
+            .subscribe(guessed => {
               if (guessed != null) {
                 for (var i = 0; i < guessed.length; i++) {
                   for (var j = 0; j < this.words.length; j++) {
                     if (this.words[j].id == guessed[i].wordID) {
-                      this.words.splice(j, 1); break;
+                      this.words.splice(j, 1);
+                      break;
                     }
                   }
                 }
               }
-              if(this.words.length!=0)
-                this.prepareOptions();
-              else{
-                  this.presentToast();
+              if (this.words.length != 0) this.prepareOptions();
+              else {
+                this.presentToast();
               }
-            })
-        }
-        else{
+            });
+        } else {
           this.prepareOptions();
         }
-      }
-    )
+      });
   }
 
-   presentToast() {
-     let toast = this._toast.create({
-         message: 'All words from this lesson have been memorised, choose \'Revise\' to access them again ',
-         duration: 5000,
-         position: 'middle'
-       });
-   toast.present();
- }
- findWordInAllWords(){
-   for(var i=0;i<this.allWords.length;i++){
-     if(this.allWords[i].id ==this.wordToGuess.id){
-       return i
-     }
-   }
- }
+  presentToast() {
+    let toast = this._toast.create({
+      message:
+        "All words from this lesson have been memorised, choose 'Revise' to access them again ",
+      duration: 5000,
+      position: "middle"
+    });
+    toast.present();
+  }
+  findWordInAllWords() {
+    for (var i = 0; i < this.allWords.length; i++) {
+      if (this.allWords[i].id == this.wordToGuess.id) {
+        return i;
+      }
+    }
+  }
   prepareOptions() {
     this.options = [];
     var length = this.allWords.length;
@@ -103,102 +104,110 @@ export class DashboardComponent {
     var how_far = Math.floor(Math.random() * 4);
     var j = 0;
     var i;
-    for(i=0;i<4;i++){
-      this.options[i] = {id:"0",polish:"", english:"", url:"",comment:""};
+    for (i = 0; i < 4; i++) {
+      this.options[i] = {
+        id: "0",
+        polish: "",
+        english: "",
+        url: "",
+        comment: ""
+      };
     }
-    if(this.words.length==0){
+    if (this.words.length == 0) {
       this.presentToast();
-      this.wordToGuess={id:"0",polish:"", english:"", url:"",comment:""}
+      this.wordToGuess = {
+        id: "0",
+        polish: "",
+        english: "",
+        url: "",
+        comment: ""
+      };
       return 0;
     }
     this.wordToGuess = this.words[rand];
-    rand = this.findWordInAllWords()
+    rand = this.findWordInAllWords();
 
-    if (rand + how_far < length && rand - (3-how_far)>=0) {console.log("pierwszy");
-      for (i = rand-(3-how_far); i <= rand + how_far; i++) {
-        if(this.allWords[i]!=undefined)
-          this.options[j] = this.allWords[i];
+    if (rand + how_far < length && rand - (3 - how_far) >= 0) {
+      for (i = rand - (3 - how_far); i <= rand + how_far; i++) {
+        if (this.allWords[i] != undefined) this.options[j] = this.allWords[i];
         j++;
       }
-    }
-    else if (rand + how_far < length && rand- (3-how_far)<0) {console.log("drugi");
+    } else if (rand + how_far < length && rand - (3 - how_far) < 0) {
       for (i = length + rand - (3 - how_far); i < length; i++) {
-        if(this.allWords[i]!=undefined)
-          this.options[j] = this.allWords[i];
+        if (this.allWords[i] != undefined) this.options[j] = this.allWords[i];
         j++;
       }
       for (i = 0; i <= rand + how_far; i++) {
-        if(this.allWords[i]!=undefined)
-          this.options[j] = this.allWords[i];
+        if (this.allWords[i] != undefined) this.options[j] = this.allWords[i];
         j++;
       }
-    }
-    else if(rand + how_far >= length && rand - (3 - how_far) >=0 ) {console.log("trzeci");
+    } else if (rand + how_far >= length && rand - (3 - how_far) >= 0) {
       for (i = rand - (3 - how_far); i < length; i++) {
-        if(this.allWords[i]!=undefined)
-          this.options[j] = this.allWords[i];
+        if (this.allWords[i] != undefined) this.options[j] = this.allWords[i];
         j++;
       }
-      for (i=0;i<=rand+how_far-length;i++){
-        if(this.allWords[i]!=undefined)
-          this.options[j] = this.allWords[i];
+      for (i = 0; i <= rand + how_far - length; i++) {
+        if (this.allWords[i] != undefined) this.options[j] = this.allWords[i];
         j++;
       }
-
-    }
-    else{console.log("czwarty");
-      for(i=0;i<length;i++){
-        if(this.allWords[i]!=undefined)
-          this.options[i] = this.allWords[i];
+    } else {
+      for (i = 0; i < length; i++) {
+        if (this.allWords[i] != undefined) this.options[i] = this.allWords[i];
       }
     }
-
-    console.log(how_far)
-    console.log(rand)
-    console.log(this.options);
-    this.dataReady=true;
+    this.dataReady = true;
   }
   assign(x: string) {
     this.showHint = true;
     if (!this.clicked) {
       this.clicked = true;
       this.response = x;
-      if(this.eng2pol)
-        this.ok = this.response.toLowerCase() == this.wordToGuess.polish.toLowerCase() ? true : false;
+      if (this.eng2pol)
+        this.ok =
+          this.response.toLowerCase() == this.wordToGuess.polish.toLowerCase()
+            ? true
+            : false;
       else
-        this.ok = this.response.toLowerCase() == this.wordToGuess.english.toLowerCase() ? true : false;
-
+        this.ok =
+          this.response.toLowerCase() == this.wordToGuess.english.toLowerCase()
+            ? true
+            : false;
     }
   }
   swipeEvent(e) {
-    if (e.direction == '2') {
+    if (e.direction == "2") {
       this.nextword();
     }
   }
   nextword() {
     if (this.clicked) {
-      this._backendService.addOrUpdateStudentWord(this.ok, this.userID, this.wordToGuess.id).subscribe(data => {
-        this._backendService.getAllGuessed(this._loginService.getUserID()).subscribe(guessed => {
-          if (guessed != null && this.modeOfWords) {
-            for (var i = 0; i < guessed.length; i++) {
-              for (var j = 0; j < this.words.length; j++) {
-                if (this.words[j].id == guessed[i].wordID) {
-                  this.words.splice(j, 1); break;
+      this._backendService
+        .addOrUpdateStudentWord(this.ok, this.userID, this.wordToGuess.id)
+        .subscribe(data => {
+          this._backendService
+            .getAllGuessed(this._loginService.getUserID())
+            .subscribe(guessed => {
+              if (guessed != null && this.modeOfWords) {
+                for (var i = 0; i < guessed.length; i++) {
+                  for (var j = 0; j < this.words.length; j++) {
+                    if (this.words[j].id == guessed[i].wordID) {
+                      this.words.splice(j, 1);
+                      break;
+                    }
+                  }
                 }
               }
-            }
-          }
-          this.clicked = false;
-          this.response = null;
-          this.showHint = false;
-          this.ok = null;
-          this.eng2pol=!this.eng2pol;
-          this.prepareOptions();
-        })
-      })
+              this.clicked = false;
+              this.response = null;
+              this.showHint = false;
+              this.ok = null;
+              this.eng2pol = !this.eng2pol;
+              this.prepareOptions();
+            });
+        });
     }
   }
-  toggleHint(){
+  toggleHint() {
     this.showHint = !this.showHint;
   }
   logout() {
