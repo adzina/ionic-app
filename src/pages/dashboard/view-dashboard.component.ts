@@ -4,6 +4,7 @@ import { BackendService } from "../../services/backend.service";
 import { LoginService } from "../../services/login.service";
 import { UserService } from "../../services/user.service";
 import { GoodbyeComponent } from "../goodbye/view-goodbye.component";
+import { ProgressComponent } from "../progress/view-progress.component";
 import { Lesson } from "../../models/lesson";
 import { Word } from "../../models/word";
 import { ToastController } from "ionic-angular";
@@ -82,8 +83,8 @@ export class DashboardComponent {
   presentToast() {
     let toast = this._toast.create({
       message:
-        "All words from this lesson have been memorised, choose 'Revise' to access them again ",
-      duration: 5000,
+        "All words from this lesson have been memorised, select 'Revision mode' to access them again ",
+      duration: 2000,
       position: "middle"
     });
     toast.present();
@@ -125,6 +126,10 @@ export class DashboardComponent {
       return 0;
     }
     this.wordToGuess = this.words[rand];
+    this._backendService.getAudio(this.wordToGuess.id).subscribe(data=> {
+        this.wordToGuess.url = data;
+    });
+ 
     rand = this.findWordInAllWords();
 
     if (rand + how_far < length && rand - (3 - how_far) >= 0) {
@@ -212,5 +217,8 @@ export class DashboardComponent {
   }
   logout() {
     this._navCtrl.push(GoodbyeComponent);
+  }
+  goToProgress() {
+    this._navCtrl.push(ProgressComponent)
   }
 }

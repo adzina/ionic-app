@@ -14,8 +14,8 @@ import 'rxjs/add/operator/map';
 export class BackendService{
 
 //g_url="http://10.0.2.2:1337/";
-//g_url="http://localhost:1337/";
-g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
+g_url="http://localhost:1337/";
+//g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
   auth: AuthService;
   allWords=[];
   constructor(private _loginService:LoginService,
@@ -186,6 +186,13 @@ setApiUrl(url:string){
        })
      })
 
+  }
+  getAudio(wordID: string): Observable<any> {
+    var url: string = this.g_url + "word/audio/" + wordID;
+    return this.http
+      .get(url)
+      .map(res => res.json())
+      .catch((error: any) => Observable.throw("Error getting audio"));
   }
 
 }

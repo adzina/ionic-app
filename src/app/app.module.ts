@@ -54,7 +54,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     HttpModule,
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(LanguageApp)
+    IonicModule
   ],
 
   bootstrap: [IonicApp],
