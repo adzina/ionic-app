@@ -1,26 +1,36 @@
 <ion-header>
   <ion-navbar>
-    <img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" class="pull-left" />
+    <img
+      src="assets/icon/logo.png"
+      width="70px"
+      height="50px"
+      style="display:inline-block"
+      class="pull-left"
+    />
     <ion-title class="titleicon" style="display:inline-block">Login</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content class="no-scroll">
-  <div style="margin-bottom:20%">
-  </div>
-  <div text-center padding>
-    <h2>Welcome to the AKN learning app!</h2>
-  </div>
-  <ion-list>
-    <ion-item class="item">
-      <ion-label style="color:black" stacked class="alabel">Email</ion-label>
-      <ion-input type="text" name="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
-    <ion-item class="item">
-      <ion-label style="color:black" stacked>Password</ion-label>
-      <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-  </ion-list>
-  <div padding>
-    <button ion-button color="primary" block (click)="submit('student')">Sign in</button>
+<ion-content class="no-scroll vertical-center-container">
+  <div class="center">
+    <div text-center padding><h2>Welcome to the AKN learning app!</h2></div>
+    <ion-list>
+      <ion-item class="item">
+        <ion-label style="color:black" stacked>Email</ion-label>
+        <ion-input type="text" name="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item class="item">
+        <ion-label style="color:black" stacked>Password</ion-label>
+        <ion-input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button color="primary" block (click)="submit('student')">
+        Sign in
+      </button>
+    </div>
   </div>
 </ion-content>

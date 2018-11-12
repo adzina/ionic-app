@@ -1,34 +1,42 @@
 <ion-header>
   <ion-navbar>
-    <img src="assets/icon/logo.png" width="70px" height="50px" style="display:inline-block" />
+    <img
+      src="assets/icon/logo.png"
+      width="70px"
+      height="50px"
+      style="display:inline-block"
+    />
     <ion-title class="titleicon" style="display:inline-block">Choose scope</ion-title>
     <ion-buttons start>
-      <button ion-button class="logout" (click)="logout()">
-        Logout
-      </button>
+      <button ion-button class="logout" (click)="logout()">Logout</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <div padding *ngIf="mode==null">
-    <div padding style="margin-bottom:20%">
+<ion-content class="vertical-center-container">
+  <div class="center">
+    <div padding *ngIf="mode == null">
+      <button ion-button color="primary" block (click)="setmode(0)">
+        From date to date
+      </button>
+      <button ion-button color="primary" block (click)="setmode(1)">
+        Specific lesson
+      </button>
     </div>
-    <button ion-button color="primary" block (click)="setmode(0)">From date to date</button>
-    <button ion-button color="primary" block (click)="setmode(1)">Specific lesson</button>
-  </div>
-  <div *ngIf="mode==0" style="text-align: center;">
-    <div padding style="margin-bottom:20%">
+    <div *ngIf="mode == 0" style="text-align: center;">
+      <button ion-button block (click)="from()">From</button>
+      <button ion-button block (click)="until()">Until</button>
     </div>
-    <button ion-button (click)="from()">From</button>
-    <button ion-button (click)="until()">Until</button>
-  </div>
-  <div *ngIf="mode==1" style="text-align: center;">
-    <ion-list>
-      <ion-item *ngFor="let date of lessonsDate;  let i=index">
-        <ion-label>{{date.day}}.{{date.month}}.{{date.year}}: {{lessons[i].subject}}</ion-label>
-        <ion-checkbox [(ngModel)]="checked[i]"></ion-checkbox>
-      </ion-item>
-    </ion-list>
-    <button ion-button color="success" block (click)="submit()">submit</button>
+    <div *ngIf="mode == 1" style="text-align: center;">
+      <ion-list>
+        <ion-item *ngFor="let date of lessonsDate; let i = index">
+          <ion-label>{{ date.day }}.{{ date.month }}.{{ date.year }}:
+            {{ lessons[i].subject }}</ion-label>
+          <ion-checkbox [(ngModel)]="checked[i]"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <button ion-button color="success" block (click)="submit()">
+        submit
+      </button>
+    </div>
   </div>
 </ion-content>
