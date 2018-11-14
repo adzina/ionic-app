@@ -25,9 +25,9 @@ export class MenuLessonComponent {
 
   setmode(m: number) {
     switch(m) {
-      case 0: this._navCtrl.push(ChooseLessonComponent);
-      case 1: this._navCtrl.push(ProgressComponent);
-      case 2: this._navCtrl.push(ChangePasswordComponent)
+      case 0: this._navCtrl.push(ChooseLessonComponent);break;
+      case 1: this._navCtrl.push(ProgressComponent);break;
+      case 2: this._navCtrl.push(ChangePasswordComponent);break;
     }
   }
   logout() {
