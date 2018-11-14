@@ -17,6 +17,7 @@ import { ChooseRevisionLearningComponent } from "../pages/choose-revision-learni
 import { DashboardComponent } from "../pages/dashboard/view-dashboard.component";
 import { ProgressComponent } from "../pages/progress/view-progress.component";
 import { GoodbyeComponent } from "../pages/goodbye/view-goodbye.component";
+import { ChangePasswordComponent } from "../pages/change-password/view-change-password.component";
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -48,7 +49,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProgressComponent,
     ChooseRevisionLearningComponent,
     DashboardComponent,
-    GoodbyeComponent
+    GoodbyeComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProgressComponent,
     ChooseRevisionLearningComponent,
     DashboardComponent,
-    GoodbyeComponent
+    GoodbyeComponent,
+    ChangePasswordComponent
   ],
   providers: [
     {

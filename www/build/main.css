@@ -25232,6 +25232,20 @@ ion-navbar.toolbar {
   overflow: hidden;
 }
 
+.vertical-center-container {
+  min-height: 70vh;
+  position: relative;
+}
+
+.center {
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 .container {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
@@ -25378,17 +25392,4 @@ h2.yellow {
 
 h2.green {
   background-color: lightgreen;
-}
-
-.vertical-center-container {
-  min-height: 70vh;
-  position: relative;
-}
-
-.center {
-  position: absolute;
-  width: 90%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
 }

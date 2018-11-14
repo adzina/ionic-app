@@ -5,6 +5,7 @@ import { BackendService } from "../../services/backend.service";
 import { ProgressComponent } from "../progress/view-progress.component";
 import { GoodbyeComponent } from "../goodbye/view-goodbye.component";
 import { ChooseLessonComponent } from "../choose-lesson/view-choose-lesson.component";
+import { ChangePasswordComponent } from "../change-password/view-change-password.component";
 @Component({
   selector: "menu-lesson",
   templateUrl: "view-menu-lesson.component.html"
@@ -23,8 +24,11 @@ export class MenuLessonComponent {
   }
 
   setmode(m: number) {
-    if (m) this._navCtrl.push(ProgressComponent);
-    else this._navCtrl.push(ChooseLessonComponent);
+    switch(m) {
+      case 0: this._navCtrl.push(ChooseLessonComponent);
+      case 1: this._navCtrl.push(ProgressComponent);
+      case 2: this._navCtrl.push(ChangePasswordComponent)
+    }
   }
   logout() {
     this._navCtrl.push(GoodbyeComponent);

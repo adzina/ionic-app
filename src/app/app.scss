@@ -25,3 +25,14 @@ margin-bottom:10px;
 .no-scroll .scroll-content{
     overflow: hidden;
   }
+.vertical-center-container {
+  min-height: 70vh;
+  position: relative;
+}
+.center {
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}

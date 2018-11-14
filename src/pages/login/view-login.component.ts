@@ -57,8 +57,8 @@ export class LoginComponent {
     let body = JSON.stringify({ email, pswd });
 
     //this.url="http://10.0.2.2:1337/user/login";
-    //this.url = "http://localhost:1337/user/login";
-    this.url='http://54976-1-fba7f6-01.services.oktawave.com:1337/user/login';
+    this.url = "http://localhost:1337/user/login";
+    //this.url='http://54976-1-fba7f6-01.services.oktawave.com:1337/user/login';
     this.http
       .get("assets/config.json")
       .map(res => res.json())
