@@ -34,9 +34,13 @@
           <ion-checkbox [(ngModel)]="checked[i]"></ion-checkbox>
         </ion-item>
       </ion-list>
-      <button ion-button color="success" block (click)="submit()">
-        submit
-      </button>
+      <div padding>
+        <p>In Revision mode you can access all words from this lesson.</p>
+        <button ion-button color="primary" block (click)="submit(0)">Revision</button>
+        <br>
+        <p>In Learning mode you can access only words you haven't mastered yet.</p>
+        <button ion-button color="primary" block (click)="submit(1)">Learning</button>
+      </div>
     </div>
   </div>
 </ion-content>

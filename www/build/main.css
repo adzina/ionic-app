@@ -25246,20 +25246,6 @@ ion-navbar.toolbar {
   transform: translate(-50%, -50%);
 }
 
-.container {
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: 100%;
-  -webkit-align-content: center !important;
-  -ms-flex-line-pack: center !important;
-  align-content: center !important;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 div.word_to_guess {
   margin-top: 50px;
   text-align: center;

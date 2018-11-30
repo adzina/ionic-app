@@ -6,7 +6,7 @@ import { UserService } from "../../services/user.service";
 import { DashboardComponent } from "../dashboard/view-dashboard.component";
 import { GoodbyeComponent } from "../goodbye/view-goodbye.component";
 import { Lesson } from "../../models/lesson";
-import { ChooseRevisionLearningComponent } from "../choose-revision-learning/view-choose-revision-learning.component";
+
 @Component({
   selector: "choose-lesson",
   templateUrl: "view-choose-lesson.component.html"
@@ -50,7 +50,7 @@ export class ChooseLessonComponent {
     }
   }
 
-  submit() {
+  submit(mode: number) {
     var lessonChosen: Lesson[];
     lessonChosen = [];
     for (var i = 0; i < this.checked.length; i++) {
@@ -59,7 +59,9 @@ export class ChooseLessonComponent {
       }
     }
     this._userService.chooseLesson(lessonChosen);
-    this._navCtrl.push(ChooseRevisionLearningComponent);
+    
+    this._userService.setModeWords(mode);
+    this._navCtrl.push(DashboardComponent);
   }
   setmode(m: number) {
     this.mode = m;

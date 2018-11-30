@@ -13,7 +13,6 @@ import { LoginComponent } from "../pages/login/view-login.component";
 import { ChooseModeComponent } from "../pages/choose-mode/view-choose-mode.component";
 import { ChooseLessonComponent } from "../pages/choose-lesson/view-choose-lesson.component";
 import { MenuLessonComponent } from "../pages/menu-lesson/view-menu-lesson.component";
-import { ChooseRevisionLearningComponent } from "../pages/choose-revision-learning/view-choose-revision-learning.component";
 import { DashboardComponent } from "../pages/dashboard/view-dashboard.component";
 import { ProgressComponent } from "../pages/progress/view-progress.component";
 import { GoodbyeComponent } from "../pages/goodbye/view-goodbye.component";
@@ -47,7 +46,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ChooseLessonComponent,
     MenuLessonComponent,
     ProgressComponent,
-    ChooseRevisionLearningComponent,
     DashboardComponent,
     GoodbyeComponent,
     ChangePasswordComponent
@@ -67,7 +65,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ChooseLessonComponent,
     MenuLessonComponent,
     ProgressComponent,
-    ChooseRevisionLearningComponent,
     DashboardComponent,
     GoodbyeComponent,
     ChangePasswordComponent
