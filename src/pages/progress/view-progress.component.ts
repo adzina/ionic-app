@@ -38,7 +38,7 @@ export class ProgressComponent {
   }
 
   toggle(i: number) {
-    this._backendService.getMyProgress(this.lessons[i]).subscribe(progress => {
+    this._backendService.getMyProgress(this.lessons[i].id).subscribe(progress => {
       this.wordsLearned = progress.guessed;
       this.wordsInLesson = progress.all;
       this.ratio = this.wordsLearned / this.wordsInLesson;
