@@ -25357,6 +25357,10 @@ div {
   margin-top: 300px;
 }
 
+.speaker-icon {
+  font-size: 5em;
+}
+
 page-hello-ionic {
   background: #ce2020;
 }
